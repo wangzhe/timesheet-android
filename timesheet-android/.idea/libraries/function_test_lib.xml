@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="function_test_lib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../timesheet-android-function-test/libs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../timesheet-android-function-test/libs" recursive="false" />
+  </library>
+</component>
