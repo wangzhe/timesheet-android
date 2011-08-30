@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import com.tw.timesheet.android.R;
+import com.tw.timesheet.android.activity.callback.StartPageActivityCallback;
+import com.tw.timesheet.android.activity.presenter.StartPageActivityPresenter;
 
-public class StartPageActivity extends Activity {
+public class StartPageActivity extends Activity implements StartPageActivityCallback {
+
+    StartPageActivityPresenter presenter = new StartPageActivityPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,23 +28,26 @@ public class StartPageActivity extends Activity {
         prepareApp();
     }
 
-    private void startApp() {
+    @Override
+    public void startNextActivity(Class activityClass, String username) {
         Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
+        intent.setClass(this, activityClass);
+
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 
     private void prepareApp() {
-        new Thread() {
+        presenter.startApp();
+    }
 
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                    startApp();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+    @Override
+    public void startNextActivity(Class activityClass) {
+
+    }
+
+    @Override
+    public void closeActivity() {
+        this.finish();
     }
 }

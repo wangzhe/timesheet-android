@@ -1,5 +1,5 @@
 package com.tw.timesheet.android.activity.callback;
 
-public interface MainActivityCallback {
-    void setLoginResultText(String prompt);
+public interface MainActivityCallback extends ActivityCallback{
+    void setTitleText(String prompt);
 }

@@ -8,22 +8,12 @@
     android:id="@+id/text_login"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="Hello Timesheet, MainActivity"
+    android:text="Hello World, Login"
     />
-<Button android:id="@+id/bt_add_time_sheet"
+<Button android:id="@+id/bt_login"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Timesheet"
-        />
-<Button android:id="@+id/bt_edit_time_sheet"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="View Timesheet"
-        />
-<Button android:id="@+id/bt_setting"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting"
+        android:text="Login"
         />
 </LinearLayout>
 
