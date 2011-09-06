@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/timesheet-android.iml" filepath="$PROJECT_DIR$/timesheet-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Timesheet-android.iml" filepath="$PROJECT_DIR$/Timesheet-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/../timesheet-android-function-test/timesheet-android-function-test.iml" filepath="$PROJECT_DIR$/../timesheet-android-function-test/timesheet-android-function-test.iml" />
     </modules>
   </component>

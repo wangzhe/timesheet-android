@@ -4,10 +4,26 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
+<TextView
+    android:id="@+id/text_login"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="Hello World, MainActivity"
+    android:text="Hello Timesheet, MainActivity"
     />
+<Button android:id="@+id/bt_add_time_sheet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Timesheet"
+        />
+<Button android:id="@+id/bt_edit_time_sheet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="View Timesheet"
+        />
+<Button android:id="@+id/bt_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Setting"
+        />
 </LinearLayout>
 

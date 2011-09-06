@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:id="@+id/userNameLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/userNameLabel"
+            android:textSize="35sp"
+            >
+    </TextView>
+    <EditText
+            android:id="@+id/userNameEdit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:hint="input username here"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:singleLine="true"
+            >
+    </EditText>
+    <TextView
+            android:id="@+id/passwordLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/passwordLabel"
+            android:textSize="35sp"
+            >
+    </TextView>
+    <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:hint="Password here"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:password="true"
+            >
+    </EditText>
+    <Button android:id="@+id/loginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            />
+    <Button android:id="@+id/resetButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            />
+</LinearLayout>
+

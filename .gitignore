@@ -1,0 +1,7 @@
+**/bin
+gen
+**/workspace.xml
+out
+.idea/workspace.xml
+reference/*
+.DS_Store
