@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="reaAcceptanceTest" default="help">
+    <exec executable="hostname" outputproperty="host.name"/>
+    <property file="build/local_properties/${host.name}.properties"/>
+    <property file="${app.code.base.dir}/build/local_properties/${host.name}.properties"/>
+
+    <property name="aus.apk.output" value="${app.code.base.dir}/build/outputs/aus"/>
+    <property name="casa.apk.output" value="${app.code.base.dir}/build/outputs/casa"/>
+
+    <property name="scenario" value=""/>
+    <property name="tag" value=""/>
+    <property name="feature" value=""/>
+    <property name="connection" value="true"/>
+    <property name="name" value=""/>
+
+    <path id="test.classpath">
+        <fileset dir="libs">
+            <include name="*.jar"/>
+        </fileset>
+        <dirset dir="gen"/>
+    </path>
+
+    <target name="help">
+        <echo>Available commands in this build script:
+        </echo>
+        <echo>devices
+            List all your available devices.
+        </echo>
+        <echo>emulator -Dname=[Your device name]
+            Start the emulator with name [above]
+        </echo>
+        <echo>deploy_aus:
+            Build and deploy the latest rea-testing.apk to emulator
+        </echo>
+        <echo>deploy_casa:
+            Build and deploy the latest casa-testing.apk to emulator
+        </echo>
+        <echo>test_aus:
+            Run adb instrument and start the functional test on Aus
+        Optional:
+            -Dscenario="Your intent scenario" to test the specified scenario
+            -Dfeature ="Your intent feature file" to test the specified feature
+            -Dconnection = "true | false" to run/not run the instrument command before test.
+        </echo>
+        <echo>test_aus_without_execute_connection:
+            Directly start the functional test on Aus
+        </echo>
+        <echo>test_casa_without_execute_connection:
+            Directly start the functional test on Aus
+        </echo>
+        <echo>test_casa:
+            Run adb instrument and start the functional test on Casa
+        Optional:
+            -Dscenario="Your intent scenario" to test the specified scenario
+            -Dfeature ="Your intent feature file" to test the specified feature
+            -Dconnection = "true | false" to run/not run the instrument command before test.
+        </echo>
+        <echo>deploy_test_aus:
+            call deploy_aus and then run the functional test on the Aus product.
+        </echo>
+        <echo>deploy_test_casa:
+            call deploy_casa and then run the functional test on the Casa product.
+        </echo>
+    </target>
+
+    <target name="clean">
+        <delete dir="gen"/>
+        <mkdir dir="gen"/>
+    </target>
+
+
+    <target name="compile" depends="clean">
+        <javac srcdir="src" destdir="gen" debug="yes">
+            <classpath refid="test.classpath"/>
+        </javac>
+    </target>
+
+    <target name="devices">
+        <exec executable="${sdk.dir}/tools/android" failonerror="the command is not available">
+            <arg line="list avd"/>
+        </exec>
+    </target>
+
+    <target name="emulator">
+        <exec executable="${sdk.dir}/tools/emulator" failonerror="the command is not available">
+            <arg line="@${name}"/>
+        </exec>
+    </target>
+
+    <target name="deploy_aus">
+        <ant antfile="${android.core.dir}/src/REA_Aus/build.xml" target="generate-testing"
+             usenativebasedir="true"/>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="uninstall apk file failed">
+            <arg line="uninstall au.com.realestate.app"/>
+        </exec>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="uninstall apk file failed">
+            <arg line="uninstall it.casa.app"/>
+        </exec>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="install apk file failed">
+            <arg line="install ${aus.apk.output}/rea-testing.apk"/>
+        </exec>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="failed to start the app">
+            <arg line="shell am start -n 'au.com.realestate.app/au.com.realestate.aus.activity.AusMainActivity'"/>
+        </exec>
+    </target>
+
+    <target name="deploy_casa">
+        <ant antfile="${android.core.dir}/src/REA_Casa/build.xml" target="generate-testing"
+             usenativebasedir="true"/>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="uninstall apk file failed">
+            <arg line="uninstall it.casa.app"/>
+        </exec>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="uninstall apk file failed">
+            <arg line="uninstall au.com.realestate.app"/>
+        </exec>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="install apk file failed">
+            <arg line="install ${casa.apk.output}/casa-testing.apk"/>
+        </exec>
+        <exec executable="${sdk.dir}/platform-tools/adb" failonerror="failed to start the app">
+            <arg line="shell am start -n 'it.casa.app/it.casa.app.activity.CasaMainActivity'"/>
+        </exec>
+    </target>
+
+    <target name="deploy_test_aus" depends="compile,deploy_aus,test_aus"/>
+    <target name="deploy_test_casa" depends="compile,deploy_casa,test_casa"/>
+
+    <target name="test_aus" depends="compile">
+        <taskdef name="cuke4duke" classname="au.com.realestate.ant.Cuke4DukeTask" classpath="gen"/>
+        <cuke4duke target="aus" adbCommand="${sdk.dir}/platform-tools/adb" jrubyCommand="${jruby.dir}/jruby"
+                   scenario="${scenario}" tag="${tag}" feature="${feature}"
+                   libPath="libs" classPath="gen" connection="${connection}"/>
+    </target>
+
+    <target name="test_aus_without_execute_connection" depends="compile">
+        <taskdef name="cuke4duke" classname="au.com.realestate.ant.Cuke4DukeTask" classpath="gen"/>
+        <cuke4duke target="aus" adbCommand="${sdk.dir}/platform-tools/adb" jrubyCommand="${jruby.dir}/jruby"
+                   libPath="libs" classPath="gen" connection="false"/>
+    </target>
+
+    <target name="test_casa" depends="compile">
+        <taskdef name="cuke4duke" classname="au.com.realestate.ant.Cuke4DukeTask" classpath="gen"/>
+        <cuke4duke target="casa" adbCommand="${sdk.dir}/platform-tools/adb" jrubyCommand="${jruby.dir}/jruby"
+                   scenario="${scenario}" feature="${feature}"
+                   libPath="libs" classPath="gen" connection="${connection}"/>
+    </target>
+
+    <target name="test_casa_without_execute_connection" depends="compile">
+        <taskdef name="cuke4duke" classname="au.com.realestate.ant.Cuke4DukeTask" classpath="gen"/>
+        <cuke4duke target="casa" adbCommand="${sdk.dir}/platform-tools/adb" jrubyCommand="${jruby.dir}/jruby"
+                   libPath="libs" classPath="gen" connection="false"/>
+    </target>
+</project>

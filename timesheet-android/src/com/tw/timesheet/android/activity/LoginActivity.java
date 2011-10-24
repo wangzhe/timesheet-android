@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.tw.timesheet.android.R;
-import com.tw.timesheet.android.activity.callback.LoginActivityCallback;
-import com.tw.timesheet.android.activity.presenter.LoginActivityPresenter;
+import com.tw.timesheet.android.activity.callback.LoginActivityView;
+import com.tw.timesheet.android.presenter.LoginActivityPresenter;
 
-public class LoginActivity extends Activity implements LoginActivityCallback {
+public class LoginActivity extends Activity implements LoginActivityView
+{
 
     LoginActivityPresenter presenter = new LoginActivityPresenter(this);
     private TextView text;
@@ -26,19 +28,20 @@ public class LoginActivity extends Activity implements LoginActivityCallback {
     }
 
     private void bindData() {
+        System.out.println(getIntent());
         username = getIntent().getStringExtra("username");
     }
 
     private void initUI() {
-        loginButton = (Button) findViewById(R.id.loginButton);
-        text = (TextView) findViewById(R.id.text_login);
+        loginButton = (Button) findViewById(R.id.login_button);
+        text = (EditText) findViewById(R.id.user_name_edit);
         text.setText(username);
     }
 
     private void setListeners() {
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                presenter.clickLoginButton();
+                presenter.loginButtonClicked();
             }
         });
     }

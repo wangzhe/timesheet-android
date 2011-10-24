@@ -1,15 +1,13 @@
 package com.tw.timesheet.android.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import com.tw.timesheet.android.R;
-import com.tw.timesheet.android.activity.callback.StartPageActivityCallback;
-import com.tw.timesheet.android.activity.presenter.StartPageActivityPresenter;
+import com.tw.timesheet.android.activity.callback.StartPageActivityView;
+import com.tw.timesheet.android.presenter.StartPageActivityPresenter;
 
-public class StartPageActivity extends Activity implements StartPageActivityCallback {
+public class StartPageActivity extends TimeSheetActivity implements StartPageActivityView {
 
-    StartPageActivityPresenter presenter = new StartPageActivityPresenter(this);
+    StartPageActivityPresenter presenter = new StartPageActivityPresenter(this, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +26,7 @@ public class StartPageActivity extends Activity implements StartPageActivityCall
         prepareApp();
     }
 
-    @Override
-    public void startNextActivity(Class activityClass, String username) {
-        Intent intent = new Intent();
-        intent.setClass(this, activityClass);
-
-        intent.putExtra("username", username);
-        startActivity(intent);
-    }
-
     private void prepareApp() {
         presenter.startApp();
-    }
-
-    @Override
-    public void startNextActivity(Class activityClass) {
-
-    }
-
-    @Override
-    public void closeActivity() {
-        this.finish();
     }
 }

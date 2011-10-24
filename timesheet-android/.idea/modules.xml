@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../REA_Android/development/mobile-core-ios-acceptance-tests/Android/REA_Acceptance_Test.iml" filepath="$PROJECT_DIR$/../../REA_Android/development/mobile-core-ios-acceptance-tests/Android/REA_Acceptance_Test.iml" />
       <module fileurl="file://$PROJECT_DIR$/Timesheet-android.iml" filepath="$PROJECT_DIR$/Timesheet-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/../timesheet-android-function-test/timesheet-android-function-test.iml" filepath="$PROJECT_DIR$/../timesheet-android-function-test/timesheet-android-function-test.iml" />
     </modules>

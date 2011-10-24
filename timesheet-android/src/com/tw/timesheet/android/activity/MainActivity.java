@@ -1,16 +1,15 @@
 package com.tw.timesheet.android.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.tw.timesheet.android.R;
-import com.tw.timesheet.android.activity.callback.MainActivityCallback;
-import com.tw.timesheet.android.activity.presenter.MainActivityPresenter;
+import com.tw.timesheet.android.activity.callback.MainActivityView;
+import com.tw.timesheet.android.presenter.MainActivityPresenter;
 
-public class MainActivity extends Activity implements MainActivityCallback {
+public class MainActivity extends TimeSheetActivity implements MainActivityView {
 
     MainActivityPresenter presenter = new MainActivityPresenter(this);
     private TextView title;
@@ -44,24 +43,19 @@ public class MainActivity extends Activity implements MainActivityCallback {
     private void setListeners() {
         addTimesheetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                presenter.clickAddTimesheetButton();
+                presenter.addTimeSheetButtonClicked();
             }
         });
         viewTimesheetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                presenter.clickViewTimesheetButton();
+                presenter.viewTimeSheetButtonClicked();
             }
         });
         settingButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                presenter.clickSettingButton();
+                presenter.settingButtonClicked();
             }
         });
-    }
-
-    @Override
-    public void setTitleText(String prompt) {
-        title.setText(prompt);
     }
 
     @Override
@@ -74,6 +68,11 @@ public class MainActivity extends Activity implements MainActivityCallback {
     @Override
     public void closeActivity() {
         this.finish();
+    }
+
+    @Override
+    public void setTitleText(String prompt) {
+        title.setText(prompt);
     }
 }
 

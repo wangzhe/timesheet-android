@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="roboletric_lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/robolectric-1.0-RC1-jar-with-dependencies-patch.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

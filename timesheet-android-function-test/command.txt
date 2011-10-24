@@ -1,0 +1,4 @@
+adb shell am instrument it.casa.app/au.com.realestate.instrument.ReaInstrumentation;adb forward tcp:54130 tcp:54129
+adb shell am instrument au.com.realestate.app/au.com.realestate.instrument.ReaInstrumentation;adb forward tcp:54129 tcp:54129 
+jruby -J-Dapp=casa -J-Dport=54130 -S cuke4duke --verbose --jar libs --require gen features/casa-it/ --format pretty -t @automated
+jruby -J-Dapp=aus -J-Dport=54129 -S cuke4duke --verbose --jar libs --require gen features/realestate-com-au/ --color --format pretty -t @automated

@@ -1,64 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="timesheet_android" default="help">
 
-<!-- The local.properties file is created and updated by the 'android'
-     tool.
-     It contains the path to the SDK. It should *NOT* be checked into
-     Version Control Systems. -->
-    <property file="local.properties" />
+    <property file="local.properties"/>
+    <property file="build.properties"/>
+    <property file="default.properties"/>
 
-    <!-- The build.properties file can be created by you and is never touched
-         by the 'android' tool. This is the place to change some of the
-         default property values used by the Ant rules.
-         Here are some properties you may want to change/update:
+    <path id="test.classpath">
+        <fileset dir="${test.libs}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${gen.dir}">
+            <include name="R"/>
+        </fileset>
+        <fileset dir="${sdk.dir}/platforms/android-8">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${sdk.dir}/add-ons/addon_google_apis_google_inc_8/libs">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
 
-         source.dir
-             The name of the source directory. Default is 'src'.
-         out.dir
-             The name of the output directory. Default is 'bin'.
+    <target name="help">
+        <echo>Available commands in this build script:
+        </echo>
+        <echo>generate-testing:
+            Generate an apk with
+        </echo>
+        <echo>generate-installers:
+            Generate both testing and production apk
+        </echo>
+        <echo>generate-R:
+            Generate the R.java
+        </echo>
+    </target>
 
-         Properties related to the SDK location or the project target should
-         be updated using the 'android' tool with the 'update' action.
-
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems.
-
-         -->
-    <property file="build.properties" />
-
-    <!-- The default.properties file is created and updated by the 'android'
-         tool, as well as ADT.
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems. -->
-    <property file="default.properties" />
+    <taskdef classpathref="test.classpath" resource="tasks.properties"/>
 
     <!-- Custom Android task to deal with the project target, and import the
          proper rules.
          This requires ant 1.6.0 or above. -->
     <path id="android.antlibs">
-        <pathelement path="${sdk.dir}/tools/lib/anttasks.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/sdklib.jar" />
-        <pathelement path="${sdk.dir}/tools/lib/androidprefs.jar" />
+        <pathelement path="${sdk.dir}/tools/lib/anttasks.jar"/>
+        <pathelement path="${sdk.dir}/tools/lib/sdklib.jar"/>
+        <pathelement path="${sdk.dir}/tools/lib/androidprefs.jar"/>
     </path>
 
     <taskdef name="setup"
-        classname="com.android.ant.SetupTask"
-        classpathref="android.antlibs" />
+             classname="com.android.ant.SetupTask"
+             classpathref="android.antlibs"/>
 
-<!-- extension targets. Uncomment the ones where you want to do custom work
-     in between standard targets -->
-<!--
-    <target name="-pre-build">
-    </target>
-    <target name="-pre-compile">
-    </target>
+    <!-- extension targets. Uncomment the ones where you want to do custom work
+in between standard targets -->
+    <!--
+        <target name="-pre-build">
+        </target>
+        <target name="-pre-compile">
+        </target>
 
-    [This is typically used for code obfuscation.
-     Compiled code location: ${out.classes.absolute.dir}
-     If this is not done in place, override ${out.dex.input.absolute.dir}]
-    <target name="-post-compile">
-    </target>
--->
+        [This is typically used for code obfuscation.
+         Compiled code location: ${out.classes.absolute.dir}
+         If this is not done in place, override ${out.dex.input.absolute.dir}]
+        <target name="-post-compile">
+        </target>
+    -->
 
 
     <!-- Execute the Android Setup task that will setup some properties
@@ -79,6 +83,174 @@
                below to <setup import="false" />.
              - customize to your needs.
     -->
-    <setup />
+    <setup/>
 
+    <!--for testing-->
+    <taskdef name="aapt"
+             classname="com.android.ant.AaptExecLoopTask"
+             classpathref="android.antlibs"/>
+
+    <target name="coverage"
+            depends="clean,compile,instrument,test,coverage-report,summary-coverage-report,alternate-coverage-report"
+            description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+
+    <target name="clean" description="Remove all files created by the build/test process.">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${instrumented.dir}"/>
+        <delete dir="${reports.dir}"/>
+        <delete file="cobertura.log"/>
+        <delete file="cobertura.ser"/>
+    </target>
+
+    <target name="compile" depends="init,generate-R">
+        <javac srcdir="${classes.dir}" destdir="${classes.dir}" debug="yes">
+            <classpath refid="test.classpath"/>
+        </javac>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="yes">
+            <classpath refid="test.classpath"/>
+        </javac>
+        <javac srcdir="${test.dir}" destdir="${classes.dir}" debug="yes">
+            <classpath refid="test.classpath"/>
+        </javac>
+    </target>
+
+    <target name="init">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${instrumented.dir}"/>
+        <mkdir dir="${reports.xml.dir}"/>
+        <mkdir dir="${reports.html.dir}"/>
+        <mkdir dir="${coverage.xml.dir}"/>
+        <mkdir dir="${coverage.summaryxml.dir}"/>
+        <mkdir dir="${coverage.html.dir}"/>
+    </target>
+
+    <target name="generate-R" description="Generate the R.java file for this project's resources.">
+        <echo>Generating R.java / Manifest.java from the resources...</echo>
+        <mkdir dir="gen"/>
+        <!--The gen folder may not exist on CI Server-->
+        <aapt executable="${sdk.dir}/platform-tools/aapt"
+              command="package"
+              verbose="false"
+              manifest="AndroidManifest.xml"
+              androidjar="${sdk.dir}/platforms/android-8/android.jar"
+              rfolder="gen">
+            <res path="res"/>
+        </aapt>
+        <copy todir="${classes.dir}">
+            <fileset dir="gen/"/>
+        </copy>
+    </target>
+
+    <target name="instrument" depends="init,compile">
+        <!--
+              Remove the coverage data file and any old instrumentation.
+          -->
+        <delete file="cobertura.ser"/>
+        <delete dir="${instrumented.dir}"/>
+
+        <!--
+              Instrument the application classes, writing the
+              instrumented classes into ${build.instrumented.dir}.
+          -->
+        <cobertura-instrument todir="${instrumented.dir}">
+            <!--
+                   The following line causes instrument to ignore any
+                   source line containing a reference to log4j, for the
+                   purposes of coverage reporting.
+               -->
+            <ignore regex="org.apache.log4j.*"/>
+
+            <fileset dir="${classes.dir}">
+                <!--
+                        Instrument all the application classes, but
+                        don't instrument the test classes.
+                    -->
+                <include name="**/*.class"/>
+                <exclude name="**/*Test.class"/>
+                <exclude name="**/instrument/**"/>
+                <exclude name="**/R.*"/>
+                <exclude name="**/R$*.*"/>
+                <exclude name="**/*Stub.json"/>
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="test" depends="clean, init,compile, include_json">
+        <echo message="${sdk.dir}"/>
+        <junit fork="yes" dir="${basedir}" failureProperty="test.failed" haltonerror="true" haltonfailure="true"
+               printsummary="yes" forkmode="perBatch">
+            <!--
+                Note the classpath order: instrumented classes are before the
+                original (uninstrumented) classes.  This is important.
+            -->
+            <classpath location="${instrumented.dir}"/>
+            <classpath location="${classes.dir}"/>
+
+            <!--
+                The instrumented classes reference classes used by the
+                Cobertura runtime, so Cobertura and its dependencies
+                must be on your classpath.
+            -->
+            <classpath refid="test.classpath"/>
+
+            <formatter type="xml"/>
+            <batchtest todir="${reports.xml.dir}">
+                <fileset dir="${test.dir}">
+                    <include name="**/*Test.java"/>
+                    <exclude name="**/AllTests.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <junitreport todir="${reports.xml.dir}">
+            <fileset dir="${reports.xml.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${reports.html.dir}"/>
+        </junitreport>
+    </target>
+
+    <target name="include_json">
+        <copy todir="${classes.dir}">
+            <fileset dir="${test.dir}" includes="**/*.json"/>
+        </copy>
+    </target>
+
+
+    <target name="coverage-check">
+        <cobertura-check branchrate="34" totallinerate="100"/>
+    </target>
+
+    <target name="coverage-report">
+        <!--
+            Generate an XML file containing the coverage data using
+            the "srcdir" attribute.
+        -->
+        <cobertura-report srcdir="${src.dir}" destdir="${coverage.xml.dir}" format="xml"/>
+    </target>
+
+    <target name="summary-coverage-report">
+        <!--
+            Generate an summary XML file containing the coverage data using
+            the "srcdir" attribute.
+        -->
+        <cobertura-report srcdir="${src.dir}" destdir="${coverage.summaryxml.dir}" format="summaryXml"/>
+    </target>
+
+    <target name="alternate-coverage-report">
+        <!--
+            Generate a series of HTML files containing the coverage
+            data in a user-readable form using nested source filesets.
+        -->
+        <cobertura-report destdir="${coverage.html.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.java"/>
+            </fileset>
+        </cobertura-report>
+    </target>
+
+    <!--<target name="post_clean" description="Remove all files created by the build/test process.">-->
+    <!--<delete dir="${classes.dir}"/>-->
+    <!--<delete dir="${instrumented.dir}"/>-->
+    <!--</target>-->
 </project>

@@ -1,45 +1,75 @@
 package com.tw.timesheet.android.domain;
 
-public class UserProfile {
+import android.net.NetworkInfo;
+import com.tw.timesheet.android.exception.ConnectionTimeoutException;
+import com.tw.timesheet.android.net.DataServer;
+import com.tw.timesheet.android.storage.FileStorage;
 
-    private static UserProfile userProfile = null;
-    private String username = "";
-    private String password = "";
+public class UserProfile implements FileStorage {
+
+    private String username;
+    private String password;
+    private boolean hasDefaultSetting;
 
     public UserProfile() {
-        if(!startFileUtil()) return;
-        username = this.getLocalUsername();
-        password = this.getLocalPassword();
+        username = "";
+        password = "";
     }
 
-    public static UserProfile getUserProfile() {
-        return (userProfile == null) ? new UserProfile() : userProfile;
+    public UserProfile(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public boolean isLoginSuccessful() {
-        //checkNetworkConnection
-        //checkNetworkLogin
+    public boolean login(NetworkInfo network, DataServer dataServer) {
+        if (isOffline(network)) return false;
+        String response;
+
+        try {
+            response = dataServer.postHttpRequest("");
+            if (response == null) return false;
+
+        } catch (ConnectionTimeoutException cte) {
+            return false;
+        }
+
+
+
         return true;
+    }
+
+    private boolean isOffline(NetworkInfo network) {
+        return network == null || !network.isConnectedOrConnecting();
     }
 
     public boolean hasDefaultSetting() {
-        //checkFirstTimeStartActivity
-        return true;
+        return !"".equalsIgnoreCase(username) || !"".equalsIgnoreCase(password);
     }
 
     public String getUsername() {
         return username;
     }
 
-    private String getLocalPassword() {
-        return "r0ys";
+    @Override
+    public String getFileName() {
+        return "user_profile_data";
     }
 
-    private String getLocalUsername() {
-        return "tw";
+    @Override
+    public boolean isEmpty() {
+        return (username == "" || password == "");
     }
 
-    private boolean startFileUtil() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserProfile that = (UserProfile) o;
+
+        if (password != null ? !password.equals(that.password) : that.password != null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+
         return true;
     }
 }

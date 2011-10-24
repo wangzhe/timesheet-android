@@ -1,5 +1,6 @@
 package com.tw.timesheet.android.activity.callback;
 
-public interface LoginActivityCallback {
+public interface LoginActivityView
+{
     void setLoginResultText(String prompt);
 }

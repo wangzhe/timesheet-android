@@ -3,9 +3,9 @@ package com.tw.timesheet.android.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import com.tw.timesheet.android.R;
-import com.tw.timesheet.android.activity.callback.SettingActivityCallback;
+import com.tw.timesheet.android.activity.callback.SettingActivityView;
 
-public class SettingActivity extends Activity implements SettingActivityCallback {
+public class SettingActivity extends Activity implements SettingActivityView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

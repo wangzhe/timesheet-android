@@ -19,16 +19,15 @@ public final class R {
         public static final int start_page=0x7f020002;
     }
     public static final class id {
-        public static final int bt_add_time_sheet=0x7f060007;
-        public static final int bt_edit_time_sheet=0x7f060008;
-        public static final int bt_setting=0x7f060009;
-        public static final int loginButton=0x7f060004;
-        public static final int passwordEdit=0x7f060003;
-        public static final int passwordLabel=0x7f060002;
+        public static final int bt_add_time_sheet=0x7f060006;
+        public static final int bt_edit_time_sheet=0x7f060007;
+        public static final int bt_setting=0x7f060008;
+        public static final int login_button=0x7f060004;
+        public static final int password_edit=0x7f060003;
+        public static final int password_label=0x7f060002;
         public static final int resetButton=0x7f060005;
-        public static final int text_login=0x7f060006;
-        public static final int userNameEdit=0x7f060001;
-        public static final int userNameLabel=0x7f060000;
+        public static final int text_login=0x7f060000;
+        public static final int user_name_edit=0x7f060001;
     }
     public static final class layout {
         public static final int login_screen=0x7f030000;

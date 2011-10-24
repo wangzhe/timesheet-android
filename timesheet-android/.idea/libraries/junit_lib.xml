@@ -1,8 +1,8 @@
 <component name="libraryTable">
-  <library name="unit_test">
+  <library name="junit_lib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/robolectric-0.9.4-all.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/junit-4.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mockito-all-1.8.5.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
