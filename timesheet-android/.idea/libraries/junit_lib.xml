@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/libs/junit-4.8.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/libs/mockito-all-1.8.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/json.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

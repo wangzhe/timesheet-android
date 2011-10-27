@@ -3,9 +3,16 @@ package com.tw.timesheet.android.domain;
 import android.net.NetworkInfo;
 import com.tw.timesheet.android.exception.ConnectionTimeoutException;
 import com.tw.timesheet.android.net.DataServer;
+import com.tw.timesheet.android.util.IOUtil;
+import org.apache.http.client.methods.HttpPost;
+import org.hamcrest.core.IsNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -14,6 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class UserProfileTest {
 
+    public static final String DEFAULT_TEST_URI = "uri";
     private NetworkInfo networkInfo;
 
     @Before
@@ -79,8 +87,8 @@ public class UserProfileTest {
         UserProfile userProfile = new UserProfile("userA", "pwdA");
         when(networkInfo.isConnectedOrConnecting()).thenReturn(false);
 
-        assertThat(userProfile.login(networkInfo, null), is(false));
-        assertThat(userProfile.login(null, null), is(false));
+        assertThat(userProfile.login(networkInfo, null), IsNull.<NetworkResource>nullValue());
+        assertThat(userProfile.login(null, null), IsNull.<NetworkResource>nullValue());
     }
 
     @Test
@@ -88,9 +96,9 @@ public class UserProfileTest {
         UserProfile userProfile = new UserProfile("userA", "pwdA");
         when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
         DataServer dataServer = mock(DataServer.class);
-        when(dataServer.postHttpRequest(Matchers.<String>any())).thenThrow(new ConnectionTimeoutException());
+        when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenThrow(new ConnectionTimeoutException());
 
-        assertThat(userProfile.login(networkInfo, dataServer), is(false));
+        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<NetworkResource>nullValue());
     }
 
     @Test
@@ -98,28 +106,45 @@ public class UserProfileTest {
         UserProfile userProfile = new UserProfile("userA", "pwdA");
         when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
         DataServer dataServer = mock(DataServer.class);
-        when(dataServer.postHttpRequest(Matchers.<String>any())).thenReturn(null);
+        when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(null);
 
-        assertThat(userProfile.login(networkInfo, dataServer), is(false));
+        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<NetworkResource>nullValue());
     }
 
     @Test
-    public void should_login_unsuccessful_when_return_login_parsing_failed() {
-//        UserProfile userProfile = new UserProfile("userA", "pwdA");
-//        InputStream resourceAsStream = this.getClass().getResourceAsStream("com/tw/timesheet/android/json/errorloginOKStub.json");
-//        ClassLoader classLoader = this.getClass().getClassLoader();
-//        URL resource = classLoader.getResource("com/tw/timesheet/android/");
-//        InputStream resourceAsStream = classLoader.getResourceAsStream("/");
+    public void should_login_unsuccessful_when_return_login_parsing_failed() throws FileNotFoundException {
+        UserProfile userProfile = new UserProfile("userA", "pwdA");
+        FileInputStream fis = new FileInputStream("test/com/tw/timesheet/android/json/invalidate_login_response.json");
+        String response = IOUtil.getStringFromStream(fis);
+        when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
+        DataServer dataServer = mock(DataServer.class);
+        when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(response);
 
-//        System.out.println("resourceAsStream.toString() = " + resource);
-//
-//        System.out.println("IOUtil.getStringFromStream(resourceAsStream) = " + IOUtil.getStringFromStream(resourceAsStream));
-//
-//        when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
-//        DataServer dataServer = mock(DataServer.class);
-//        when(dataServer.postHttpRequest(Matchers.<String>any())).thenReturn(IOUtil.getStringFromStream(resourceAsStream));
-//
-//        assertThat(userProfile.login(networkInfo, dataServer), is(false));
+        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<NetworkResource>nullValue());
     }
 
+    @Test
+    public void should_login_successful_when_return_login_parsing_failed() throws FileNotFoundException {
+        UserProfile userProfile = new UserProfile("userA", "pwdA");
+        FileInputStream fis = new FileInputStream("test/com/tw/timesheet/android/json/login_response_ok.json");
+        String response = IOUtil.getStringFromStream(fis);
+        when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
+        DataServer dataServer = mock(DataServer.class);
+        when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(response);
+
+        NetworkResource networkResource = userProfile.login(networkInfo, dataServer);
+        assertThat(networkResource, IsNull.<NetworkResource>notNullValue());
+        assertThat(networkResource.getURI(""), is("/userAX/"));
+    }
+
+    @Test
+    public void should_return_no_default_setting_when_username_or_password_is_empty() {
+        UserProfile userProfile = new UserProfile("userA", "pwdA");
+        UserProfile userProfileNoUsername = new UserProfile("", "pwdA");
+        UserProfile userProfileNoPassword = new UserProfile("userA", "");
+
+        assertThat(userProfile.hasDefaultSetting(), is(true));
+        assertThat(userProfileNoUsername.hasDefaultSetting(), is(false));
+        assertThat(userProfileNoPassword.hasDefaultSetting(), is(false));
+    }
 }

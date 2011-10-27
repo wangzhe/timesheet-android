@@ -1,0 +1,10 @@
+{
+    "string" : "string_value",
+    "double" : 2.2,
+    "array": [
+        {"array_a": "value_a"},
+        {"array_b": "value_b"},
+        {"array_c": "value_c"}
+    ],
+    "float" : 1.0,
+}

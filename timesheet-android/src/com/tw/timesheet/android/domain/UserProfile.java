@@ -4,6 +4,8 @@ import android.net.NetworkInfo;
 import com.tw.timesheet.android.exception.ConnectionTimeoutException;
 import com.tw.timesheet.android.net.DataServer;
 import com.tw.timesheet.android.storage.FileStorage;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.protocol.HTTP;
 
 public class UserProfile implements FileStorage {
 
@@ -21,21 +23,19 @@ public class UserProfile implements FileStorage {
         this.password = password;
     }
 
-    public boolean login(NetworkInfo network, DataServer dataServer) {
-        if (isOffline(network)) return false;
+    public NetworkResource login(NetworkInfo network, DataServer dataServer) {
+        if (isOffline(network)) return null;
         String response;
-
+        NetworkResource networkResource;
         try {
-            response = dataServer.postHttpRequest("");
-            if (response == null) return false;
-
+            HttpPost request = new TWTEHttpRequestComposer().getPostRequest("", "", HTTP.UTF_8);
+            response = dataServer.postHttpRequest(request);
+            networkResource = new NetworkResource.NetworkResourceParser().parse(response);
         } catch (ConnectionTimeoutException cte) {
-            return false;
-        }
-
-
-
-        return true;
+            cte.printStackTrace();
+            return null;
+        } 
+        return networkResource;
     }
 
     private boolean isOffline(NetworkInfo network) {
@@ -43,7 +43,7 @@ public class UserProfile implements FileStorage {
     }
 
     public boolean hasDefaultSetting() {
-        return !"".equalsIgnoreCase(username) || !"".equalsIgnoreCase(password);
+        return !"".equalsIgnoreCase(username) && !"".equalsIgnoreCase(password);
     }
 
     public String getUsername() {
