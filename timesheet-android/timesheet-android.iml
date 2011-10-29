@@ -30,6 +30,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="library" scope="TEST" name="junit_lib" level="project" />
+    <orderEntry type="library" name="http_client_lib" level="project" />
     <orderEntry type="library" name="function_test_client_lib" level="project" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
