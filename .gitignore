@@ -5,4 +5,7 @@ gen
 out
 .idea/workspace.xml
 reference/*
+timesheet-android/cobertura.ser
+timesheet-android/user_profile_data
+timesheet-android/.idea
 .DS_Store
