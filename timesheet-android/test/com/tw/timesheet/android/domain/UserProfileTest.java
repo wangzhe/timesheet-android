@@ -12,7 +12,6 @@ import org.mockito.Matchers;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -87,8 +86,8 @@ public class UserProfileTest {
         UserProfile userProfile = new UserProfile("userA", "pwdA");
         when(networkInfo.isConnectedOrConnecting()).thenReturn(false);
 
-        assertThat(userProfile.login(networkInfo, null), IsNull.<NetworkResource>nullValue());
-        assertThat(userProfile.login(null, null), IsNull.<NetworkResource>nullValue());
+        assertThat(userProfile.login(networkInfo, null), IsNull.<UserResource>nullValue());
+        assertThat(userProfile.login(null, null), IsNull.<UserResource>nullValue());
     }
 
     @Test
@@ -98,7 +97,7 @@ public class UserProfileTest {
         DataServer dataServer = mock(DataServer.class);
         when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenThrow(new ConnectionTimeoutException());
 
-        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<NetworkResource>nullValue());
+        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<UserResource>nullValue());
     }
 
     @Test
@@ -108,7 +107,7 @@ public class UserProfileTest {
         DataServer dataServer = mock(DataServer.class);
         when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(null);
 
-        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<NetworkResource>nullValue());
+        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<UserResource>nullValue());
     }
 
     @Test
@@ -120,7 +119,7 @@ public class UserProfileTest {
         DataServer dataServer = mock(DataServer.class);
         when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(response);
 
-        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<NetworkResource>nullValue());
+        assertThat(userProfile.login(networkInfo, dataServer), IsNull.<UserResource>nullValue());
     }
 
     @Test
@@ -132,9 +131,9 @@ public class UserProfileTest {
         DataServer dataServer = mock(DataServer.class);
         when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(response);
 
-        NetworkResource networkResource = userProfile.login(networkInfo, dataServer);
-        assertThat(networkResource, IsNull.<NetworkResource>notNullValue());
-        assertThat(networkResource.getURI(""), is("/userAX/"));
+        UserResource userResource = userProfile.login(networkInfo, dataServer);
+        assertThat(userResource, IsNull.<UserResource>notNullValue());
+        assertThat(userResource.getURI(""), is("/userAX/"));
     }
 
     @Test

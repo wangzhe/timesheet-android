@@ -1,10 +1,11 @@
 package com.tw.timesheet.android.activity.callback;
 
+import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.storage.StorageRepository;
 
 public interface ActivityView {
 
-    void startNextActivity(Class activityClass, String username);
+    void startNextActivity(Class activityClass, StatusData statusData);
 
     void startNextActivity(Class activityClass);
 

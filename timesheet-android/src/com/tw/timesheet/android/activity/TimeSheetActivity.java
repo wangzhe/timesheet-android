@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import com.tw.timesheet.android.activity.callback.ActivityView;
+import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.storage.FileRepository;
 import com.tw.timesheet.android.storage.StorageRepository;
 import com.tw.timesheet.android.system.DeviceSystem;
@@ -13,11 +14,10 @@ import com.tw.timesheet.android.system.DeviceSystem;
 public class TimeSheetActivity extends Activity implements ActivityView, DeviceSystem {
 
     @Override
-    public void startNextActivity(Class activityClass, String username) {
+    public void startNextActivity(Class activityClass, StatusData statusData) {
         Intent intent = new Intent();
         intent.setClass(this, activityClass);
-
-        intent.putExtra("username", username);
+        intent.putExtra("statusData", statusData);
         startActivity(intent);
     }
 

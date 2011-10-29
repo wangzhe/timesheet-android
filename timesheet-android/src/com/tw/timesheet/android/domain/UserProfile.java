@@ -11,7 +11,6 @@ public class UserProfile implements FileStorage {
 
     private String username;
     private String password;
-    private boolean hasDefaultSetting;
 
     public UserProfile() {
         username = "";
@@ -23,19 +22,19 @@ public class UserProfile implements FileStorage {
         this.password = password;
     }
 
-    public NetworkResource login(NetworkInfo network, DataServer dataServer) {
+    public UserResource login(NetworkInfo network, DataServer dataServer) {
         if (isOffline(network)) return null;
         String response;
-        NetworkResource networkResource;
+        UserResource userResource;
         try {
             HttpPost request = new TWTEHttpRequestComposer().getPostRequest("", "", HTTP.UTF_8);
             response = dataServer.postHttpRequest(request);
-            networkResource = new NetworkResource.NetworkResourceParser().parse(response);
+            userResource = new UserResource.UserResourceParser().parse(response);
         } catch (ConnectionTimeoutException cte) {
             cte.printStackTrace();
             return null;
         } 
-        return networkResource;
+        return userResource;
     }
 
     private boolean isOffline(NetworkInfo network) {

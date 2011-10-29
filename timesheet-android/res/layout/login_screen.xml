@@ -2,56 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <TextView
-            android:id="@+id/text_login"
+              android:layout_height="fill_parent">
+    <TextView android:id="@+id/login_screen_status_text"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/status_text"
+              android:textSize="35sp"
+              android:visibility="gone"/>
+    <TextView android:id="@+id/login_screen_username_label"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/username_label"
+              android:textSize="35sp"/>
+    <EditText android:id="@+id/login_screen_username_edit"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:hint="input username here"
+              android:textSize="20sp"
+              android:maxLines="1"
+              android:singleLine="true"/>
+    <TextView android:id="@+id/login_screen_password_label"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/password_label"
+              android:textSize="35sp"/>
+    <EditText android:id="@+id/login_screen_password_edit"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:hint="input password here"
+              android:textSize="20sp"
+              android:maxLines="1"
+              android:singleLine="true"
+              android:password="true"/>
+    <Button android:id="@+id/login_screen_login_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/userNameLabel"
-            android:textSize="35sp"
-            >
-    </TextView>
-    <EditText
-            android:id="@+id/user_name_edit"
+            android:text="Login"/>
+    <Button android:id="@+id/login_screen_reset_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:hint="input username here"
-            android:textSize="20sp"
-            android:maxLines="1"
-            android:singleLine="true"
-            >
-    </EditText>
-    <TextView
-            android:id="@+id/password_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/passwordLabel"
-            android:textSize="35sp"
-            >
-    </TextView>
-    <EditText
-            android:id="@+id/password_edit"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:hint="Password here"
-            android:textSize="20sp"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:password="true"
-            >
-    </EditText>
-    <Button android:id="@+id/login_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            />
-    <Button android:id="@+id/resetButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Reset"
-            />
+            android:text="Reset"/>
 </LinearLayout>
 

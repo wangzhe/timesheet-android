@@ -1,6 +1,5 @@
 package com.tw.timesheet.android.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,15 +7,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.LoginActivityView;
+import com.tw.timesheet.android.domain.StatusData;
+import com.tw.timesheet.android.domain.UserProfile;
 import com.tw.timesheet.android.presenter.LoginActivityPresenter;
+import com.tw.timesheet.android.system.DeviceSystem;
 
-public class LoginActivity extends Activity implements LoginActivityView
-{
+public class LoginActivity extends TimeSheetActivity implements LoginActivityView, DeviceSystem {
 
-    LoginActivityPresenter presenter = new LoginActivityPresenter(this);
-    private TextView text;
+    LoginActivityPresenter presenter = new LoginActivityPresenter(this, this);
     private Button loginButton;
-    private String username;
+    private Button resetButton;
+    private EditText passwordEditText;
+    private EditText usernameEditText;
+    private TextView statusText;
+    private StatusData statusData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,30 +28,54 @@ public class LoginActivity extends Activity implements LoginActivityView
         setContentView(R.layout.login_screen);
         bindData();
         initUI();
-        setListeners();
+        presenter.setListeners(new UserProfile(getUsername(), getPassword()));
     }
 
     private void bindData() {
-        System.out.println(getIntent());
-        username = getIntent().getStringExtra("username");
+        statusData = (StatusData) getIntent().getSerializableExtra("statusData");
     }
 
     private void initUI() {
-        loginButton = (Button) findViewById(R.id.login_button);
-        text = (EditText) findViewById(R.id.user_name_edit);
-        text.setText(username);
+        statusText = (TextView) findViewById(R.id.login_screen_status_text);
+        usernameEditText = (EditText) findViewById(R.id.login_screen_username_edit);
+        passwordEditText = (EditText) findViewById(R.id.login_screen_password_edit);
+        loginButton = (Button) findViewById(R.id.login_screen_login_button);
+        resetButton = (Button) findViewById(R.id.login_screen_reset_button);
+        usernameEditText.setText(statusData.getUsername());
     }
 
-    private void setListeners() {
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                presenter.loginButtonClicked();
-            }
-        });
+    @Override
+    public void setLoginButtonOnClickListener(View.OnClickListener listener) {
+        loginButton.setOnClickListener(listener);
     }
 
-    public void setLoginResultText(String prompt) {
-        text.setText(prompt);
+    @Override
+    public void setResetButtonOnClickListener(View.OnClickListener listener) {
+        resetButton.setOnClickListener(listener);
+    }
+
+    @Override
+    public void setUsernameEditText(String prompt) {
+        usernameEditText.setText(prompt);
+    }
+
+    @Override
+    public void setPasswordEditText(String prompt) {
+        passwordEditText.setText(prompt);
+    }
+
+    @Override
+    public void setStatusText(String prompt) {
+        statusText.setVisibility(View.VISIBLE);
+        statusText.setText(prompt);
+    }
+
+    public String getPassword() {
+        return passwordEditText.getText().toString();
+    }
+
+    public String getUsername() {
+        return usernameEditText.getText().toString();
     }
 }
 

@@ -36,7 +36,7 @@ public class MainActivity extends TimeSheetActivity implements MainActivityView 
         addTimesheetButton = (Button) findViewById(R.id.bt_add_time_sheet);
         viewTimesheetButton = (Button) findViewById(R.id.bt_edit_time_sheet);
         settingButton = (Button) findViewById(R.id.bt_setting);
-        title = (TextView) findViewById(R.id.text_login);
+        title = (TextView) findViewById(R.id.main_screen_username_label);
         presenter.initUI();
     }
 

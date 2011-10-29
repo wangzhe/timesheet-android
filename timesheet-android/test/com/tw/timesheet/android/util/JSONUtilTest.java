@@ -28,7 +28,22 @@ public class JSONUtilTest {
     }
 
     @Test
-    public void testGetJSONString() throws Exception {
+    public void should_return_empty_when_tag_is_none() throws Exception {
+        assertThat(getJSONString(jsonObject, null), is(StringUtil.EMPTY));
+    }
+
+    @Test
+    public void should_return_expect_string_when_tag_found() throws Exception {
         assertThat(getJSONString(jsonObject, "string"), is("string_value"));
+    }
+
+    @Test
+    public void should_return_expect_string_when_tag_low_case_found() throws Exception {
+        assertThat(getJSONString(jsonObject, "sTRing"), is("string_value"));
+    }
+
+    @Test
+    public void should_return_expect_string_when_tag_not_found() throws Exception {
+        assertThat(getJSONString(jsonObject, "non_existed_tag"), is(StringUtil.EMPTY));
     }
 }

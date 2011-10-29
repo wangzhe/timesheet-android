@@ -73,4 +73,9 @@ public class FileRepositoryTest {
         assertThat(loadedFileStorage, is(fileStorage));
         new File("./temp").deleteOnExit();
     }
+
+    @Test
+    public void should_throw_file_not_found_exception_when_no_file_in_storage_repo() {
+
+    }
 }

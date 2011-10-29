@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     >
 <TextView
-    android:id="@+id/text_login"
+    android:id="@+id/main_screen_username_label"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="Hello Timesheet, MainActivity"

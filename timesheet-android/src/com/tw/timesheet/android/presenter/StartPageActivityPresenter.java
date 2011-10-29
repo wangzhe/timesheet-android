@@ -4,7 +4,8 @@ import com.tw.timesheet.android.activity.LoginActivity;
 import com.tw.timesheet.android.activity.MainActivity;
 import com.tw.timesheet.android.activity.SettingActivity;
 import com.tw.timesheet.android.activity.callback.StartPageActivityView;
-import com.tw.timesheet.android.domain.NetworkResource;
+import com.tw.timesheet.android.domain.StatusData;
+import com.tw.timesheet.android.domain.UserResource;
 import com.tw.timesheet.android.domain.UserProfile;
 import com.tw.timesheet.android.net.DataServer;
 import com.tw.timesheet.android.net.TWTEHttpClient;
@@ -16,7 +17,7 @@ public class StartPageActivityPresenter {
 
     private StartPageActivityView view;
     private DeviceSystem device;
-    private NetworkResource networkResource;
+    private UserResource userResource;
 
     public StartPageActivityPresenter(StartPageActivityView view, DeviceSystem device) {
         this.view = view;
@@ -35,14 +36,14 @@ public class StartPageActivityPresenter {
         UserProfile userProfile = storageRepository.loadData(new UserProfile());
         view.startNextActivity(
                 getNextActivityByUserProfileStatus(userProfile),
-                userProfile.getUsername());
+                new StatusData(userProfile.getUsername()));
         view.closeActivity();
     }
 
     private Class getNextActivityByUserProfileStatus(UserProfile userProfile) {
         Class nextActivity;
-        networkResource = userProfile.login(device.getActiveNetworkInfo(), DataServer.createDataServer(new TWTEHttpClient(new DefaultHttpClient())));
-        if (networkResource == null) {
+        userResource = userProfile.login(device.getActiveNetworkInfo(), DataServer.createDataServer(new TWTEHttpClient(new DefaultHttpClient())));
+        if (userResource == null) {
             nextActivity = LoginActivity.class;
         } else {
             nextActivity = (userProfile.hasDefaultSetting()) ? MainActivity.class : SettingActivity.class;

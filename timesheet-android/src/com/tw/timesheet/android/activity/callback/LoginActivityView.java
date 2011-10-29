@@ -1,6 +1,17 @@
 package com.tw.timesheet.android.activity.callback;
 
-public interface LoginActivityView
-{
-    void setLoginResultText(String prompt);
+import android.view.View;
+
+public interface LoginActivityView extends ActivityView {
+    
+    void setUsernameEditText(String prompt);
+
+    void setPasswordEditText(String prompt);
+
+    void setStatusText(String prompt);
+
+    void setLoginButtonOnClickListener(View.OnClickListener listener);
+
+    void setResetButtonOnClickListener(View.OnClickListener listener);
+
 }

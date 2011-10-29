@@ -1,4 +1,4 @@
 package com.tw.timesheet.android.activity.callback;
 
-public interface SettingActivityView {
+public interface SettingActivityView extends ActivityView {
 }

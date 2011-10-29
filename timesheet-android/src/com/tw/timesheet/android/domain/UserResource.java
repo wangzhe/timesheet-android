@@ -4,11 +4,11 @@ import com.tw.timesheet.android.util.JSONUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NetworkResource {
+public class UserResource {
 
     private String baseURI;
 
-    public NetworkResource(String source) {
+    public UserResource(String source) {
         baseURI = source;
     }
 
@@ -16,17 +16,17 @@ public class NetworkResource {
         return baseURI + requireURI;
     }
 
-    public static class NetworkResourceParser {
+    public static class UserResourceParser {
 
-        public NetworkResource parse(String content) {
+        public UserResource parse(String content) {
             if (content == null) return null;
-            NetworkResource networkResource = null;
+            UserResource userResource = null;
             try {
-                networkResource = new NetworkResource(JSONUtil.getJSONString(new JSONObject(content), "source"));
+                userResource = new UserResource(JSONUtil.getJSONString(new JSONObject(content), "source"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return networkResource;
+            return userResource;
         }
     }
 }

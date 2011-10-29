@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">timesheet-android</string>
-    <string name="passwordLabel">Password</string>
-    <string name="userNameLabel">User Name</string>
+    <string name="password_label">Password</string>
+    <string name="username_label">User Name</string>
+    <string name="status_text">Please input account info</string>
 </resources>
