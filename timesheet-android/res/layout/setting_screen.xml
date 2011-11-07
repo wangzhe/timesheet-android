@@ -3,11 +3,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/setting">
+              android:fadingEdge="none"
+              android:background="@drawable/item_background"
+              android:orientation="vertical">
+    <!--android:background="@drawable/setting">-->
     <TextView
             android:id="@+id/setting_screen_username_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="this is setting screen"
+            android:textColor="@color/black"
             />
+    <RelativeLayout android:id="@+id/setting_screen_active_background_button_area"
+                    android:layout_width="fill_parent" android:layout_height="70dp">
+        <RelativeLayout android:id="@+id/setting_screen_active_background_text_area"
+                        android:layout_width="fill_parent" android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp">
+            <TextView android:id="@+id/setting_screen_active_background_text"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="@string/active_setting"
+                      android:textColor="@color/active_setting_text"
+                      android:textSize="15dp"
+                      android:shadowColor="@color/white"
+                      android:shadowDx="0"
+                      android:shadowDy="2.0"
+                      android:shadowRadius="0.5"
+                      android:layout_alignParentLeft="true"
+                      android:layout_centerVertical="true"
+                      android:textStyle="bold"
+                      android:typeface="sans"/>
+            <!--<ImageView android:id="@+id/refine_search_channel_value"-->
+            <!--android:layout_height="wrap_content" android:layout_width="wrap_content"-->
+            <!--android:layout_alignParentRight="true"/>-->
+            <CheckBox android:id="@+id/setting_screen_active_background_value"
+                      android:layout_height="wrap_content" android:layout_width="wrap_content"
+                      android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <ImageView android:id="@+id/refine_search_channel_shadow"
+                   android:layout_height="6dp" android:layout_width="fill_parent"
+                   android:src="@drawable/shadow_hoz_bottom_top" android:scaleType="fitXY"
+                   android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    <Button android:id="@+id/setting_screen_save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"/>
+    <Button android:id="@+id/setting_screen_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"/>
+    <ImageView android:layout_height="wrap_content" android:layout_width="fill_parent"
+               android:src="@drawable/shadow_hoz_top_bottom" android:scaleType="fitXY"/>
 </LinearLayout>

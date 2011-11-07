@@ -1,3 +1,5 @@
 <resources>
     <color name="white">#eeeeff</color>
+    <color name="black">#2e2e2e</color>
+    <color name="active_setting_text">#2e2e2e</color>
 </resources>
