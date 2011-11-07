@@ -2,11 +2,10 @@ package com.tw.timesheet.android.presenter;
 
 import com.tw.timesheet.android.activity.LoginActivity;
 import com.tw.timesheet.android.activity.MainActivity;
-import com.tw.timesheet.android.activity.SettingActivity;
 import com.tw.timesheet.android.activity.callback.StartPageActivityView;
 import com.tw.timesheet.android.domain.StatusData;
-import com.tw.timesheet.android.domain.UserResource;
 import com.tw.timesheet.android.domain.UserProfile;
+import com.tw.timesheet.android.domain.UserResource;
 import com.tw.timesheet.android.net.DataServer;
 import com.tw.timesheet.android.net.TWTEHttpClient;
 import com.tw.timesheet.android.storage.StorageRepository;
@@ -27,6 +26,11 @@ public class StartPageActivityPresenter {
     public void startApp() {
         new Thread() {
             public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 onAppStart(view.getFileRepository(UserProfile.class));
             }
         }.start();
@@ -46,7 +50,7 @@ public class StartPageActivityPresenter {
         if (userResource == null) {
             nextActivity = LoginActivity.class;
         } else {
-            nextActivity = (userProfile.hasDefaultSetting()) ? MainActivity.class : SettingActivity.class;
+            nextActivity = MainActivity.class;
         }
         return nextActivity;
     }
