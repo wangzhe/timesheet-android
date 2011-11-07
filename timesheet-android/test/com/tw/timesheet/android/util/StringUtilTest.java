@@ -24,6 +24,7 @@ public class StringUtilTest {
 
     @Test
     public void should_return_the_same_string_when_copy_is_string() throws Exception {
+        new StringUtil(); //TODO why this?
         assertThat(StringUtil.copy("my_string"), is("my_string"));
     }
 }

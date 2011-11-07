@@ -16,7 +16,7 @@ public class TimeSheetActivity extends Activity implements ActivityView, DeviceS
     @Override
     public void startNextActivity(Class activityClass, StatusData statusData) {
         Intent intent = new Intent();
-        intent.setClass(this, activityClass);
+        intent.setClassName(getPackageName(), activityClass.getName());
         intent.putExtra("statusData", statusData);
         startActivity(intent);
     }

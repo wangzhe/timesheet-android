@@ -1,20 +1,20 @@
 package com.tw.timesheet.android.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.MainActivityView;
+import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.presenter.MainActivityPresenter;
 
 public class MainActivity extends TimeSheetActivity implements MainActivityView {
 
     MainActivityPresenter presenter = new MainActivityPresenter(this);
     private TextView title;
-    private Button addTimesheetButton;
-    private Button viewTimesheetButton;
+    private Button insertTimeSheetButton;
+    private Button viewTimeSheetButton;
     private Button settingButton;
 
     @Override
@@ -23,51 +23,34 @@ public class MainActivity extends TimeSheetActivity implements MainActivityView 
         setContentView(R.layout.main);
         bindData();
         initUI();
-        setListeners();
+        presenter.setListeners();
     }
 
-    private void bindData() {
-        //if this is only a show text, just put it into initUI,
-        //but if this is changed by behaviors, then bind it with presenter
-        presenter.setUsername(getIntent().getStringExtra("username"));
+    protected void bindData() {
+        presenter.setStatusData((StatusData) getIntent().getSerializableExtra("statusData"));
     }
 
-    private void initUI() {
-        addTimesheetButton = (Button) findViewById(R.id.bt_add_time_sheet);
-        viewTimesheetButton = (Button) findViewById(R.id.bt_edit_time_sheet);
+    protected void initUI() {
+        insertTimeSheetButton = (Button) findViewById(R.id.bt_add_time_sheet);
+        viewTimeSheetButton = (Button) findViewById(R.id.bt_edit_time_sheet);
         settingButton = (Button) findViewById(R.id.bt_setting);
         title = (TextView) findViewById(R.id.main_screen_username_label);
         presenter.initUI();
     }
 
-    private void setListeners() {
-        addTimesheetButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                presenter.addTimeSheetButtonClicked();
-            }
-        });
-        viewTimesheetButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                presenter.viewTimeSheetButtonClicked();
-            }
-        });
-        settingButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                presenter.settingButtonClicked();
-            }
-        });
+    @Override
+    public void setInsertTimeSheetButtonOnClickListener(View.OnClickListener listener) {
+        insertTimeSheetButton.setOnClickListener(listener);
     }
 
     @Override
-    public void startNextActivity(Class activityClass) {
-        Intent intent = new Intent();
-        intent.setClass(this, activityClass);
-        startActivity(intent);
+    public void setViewTimeSheetButtonOnClickListener(View.OnClickListener listener) {
+        viewTimeSheetButton.setOnClickListener(listener);
     }
 
     @Override
-    public void closeActivity() {
-        this.finish();
+    public void setSettingButtonOnClickListener(View.OnClickListener listener) {
+        settingButton.setOnClickListener(listener);
     }
 
     @Override

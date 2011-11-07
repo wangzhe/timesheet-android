@@ -140,7 +140,8 @@ public class UserProfileTest {
     public void should_return_no_default_setting_when_username_or_password_is_empty() {
         UserProfile userProfile = new UserProfile("userA", "pwdA");
         UserProfile userProfileNoUsername = new UserProfile("", "pwdA");
-        UserProfile userProfileNoPassword = new UserProfile("userA", "");
+        UserProfile userProfileNoPassword = new UserProfile("userA", "pwdA");
+        userProfileNoPassword.update("userA", "");
 
         assertThat(userProfile.hasDefaultSetting(), is(true));
         assertThat(userProfileNoUsername.hasDefaultSetting(), is(false));

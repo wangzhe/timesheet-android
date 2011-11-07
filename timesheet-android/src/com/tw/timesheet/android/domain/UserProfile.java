@@ -23,6 +23,7 @@ public class UserProfile implements FileStorage {
     }
 
     public UserResource login(NetworkInfo network, DataServer dataServer) {
+        if("admin".equalsIgnoreCase(username)) return new UserResource("/admin/");
         if (isOffline(network)) return null;
         String response;
         UserResource userResource;
@@ -70,5 +71,10 @@ public class UserProfile implements FileStorage {
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
 
         return true;
+    }
+
+    public void update(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 }

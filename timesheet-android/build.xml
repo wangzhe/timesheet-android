@@ -170,7 +170,7 @@ in between standard targets -->
                 <exclude name="**/instrument/**"/>
                 <exclude name="**/R.*"/>
                 <exclude name="**/R$*.*"/>
-                <exclude name="**/*Stub.json"/>
+                <exclude name="**/*Stub.*"/>
             </fileset>
         </cobertura-instrument>
     </target>

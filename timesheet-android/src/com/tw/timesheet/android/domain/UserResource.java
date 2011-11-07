@@ -4,7 +4,9 @@ import com.tw.timesheet.android.util.JSONUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UserResource {
+import java.io.Serializable;
+
+public class UserResource implements Serializable {
 
     private String baseURI;
 

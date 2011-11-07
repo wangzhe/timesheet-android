@@ -28,14 +28,14 @@ public class LoginActivity extends TimeSheetActivity implements LoginActivityVie
         setContentView(R.layout.login_screen);
         bindData();
         initUI();
-        presenter.setListeners(new UserProfile(getUsername(), getPassword()));
+        setListeners(new UserProfile(getUsername(), getPassword()), presenter);
     }
 
-    private void bindData() {
+    protected void bindData() {
         statusData = (StatusData) getIntent().getSerializableExtra("statusData");
     }
 
-    private void initUI() {
+    protected void initUI() {
         statusText = (TextView) findViewById(R.id.login_screen_status_text);
         usernameEditText = (EditText) findViewById(R.id.login_screen_username_edit);
         passwordEditText = (EditText) findViewById(R.id.login_screen_password_edit);
@@ -70,12 +70,29 @@ public class LoginActivity extends TimeSheetActivity implements LoginActivityVie
         statusText.setText(prompt);
     }
 
+    @Override
     public String getPassword() {
         return passwordEditText.getText().toString();
     }
 
+    @Override
     public String getUsername() {
         return usernameEditText.getText().toString();
+    }
+
+    public void setListeners(final UserProfile userProfile, final LoginActivityPresenter loginActivityPresenter) {
+        setLoginButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginActivityPresenter.login(userProfile);
+            }
+        });
+        setResetButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginActivityPresenter.reset();
+            }
+        });
     }
 }
 

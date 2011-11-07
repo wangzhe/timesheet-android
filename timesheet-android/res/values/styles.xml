@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WindowTitleBackground">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="DefaultTheme" parent="android:Theme">
+        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
+        <item name="android:windowTitleSize">42px</item>
+    </style>
+</resources>

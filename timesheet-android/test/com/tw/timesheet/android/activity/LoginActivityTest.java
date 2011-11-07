@@ -1,7 +1,6 @@
 package com.tw.timesheet.android.activity;
 
 import android.content.Intent;
-import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,20 +8,19 @@ import android.widget.TextView;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.domain.UserProfile;
-import com.tw.timesheet.android.net.DataServer;
 import com.tw.timesheet.android.presenter.LoginActivityPresenter;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 @RunWith(RobolectricTestRunner.class)
 public class LoginActivityTest {
@@ -64,24 +62,22 @@ public class LoginActivityTest {
 
     @Test
     public void should_clean_login_and_password_content_when_reset_button_clicked() {
-        LoginActivityPresenter presenter = new LoginActivityPresenter(loginActivity, loginActivity);
-        presenter.setListeners(null);
+        LoginActivityPresenter presenter = mock(LoginActivityPresenter.class);
+        loginActivity.setListeners(null, presenter);
         
         resetButton.performClick();
 
-        assertThat(usernameEdit.getText().toString(), is(""));
-        assertThat(passwordEdit.getText().toString(), is(""));
+        verify(presenter).reset();
     }
 
     @Test
     public void should_show_status_text_when_login_button_clicked_but_failed() {
-        LoginActivityPresenter presenter = new LoginActivityPresenter(loginActivity, loginActivity);
+        LoginActivityPresenter presenter = mock(LoginActivityPresenter.class);
         UserProfile userProfile = mock(UserProfile.class);
-        when(userProfile.login(Matchers.<NetworkInfo>any(), Matchers.<DataServer>any())).thenReturn(null);
-        presenter.setListeners(userProfile);
+        loginActivity.setListeners(userProfile, presenter);
 
         loginButton.performClick();
 
-        assertThat(statusText.getText().toString(), is("user or password is invalid"));
+        verify(presenter).login(eq(userProfile));
     }
 }

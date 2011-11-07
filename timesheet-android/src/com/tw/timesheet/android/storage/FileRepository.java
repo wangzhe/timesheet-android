@@ -5,6 +5,7 @@ import com.tw.timesheet.android.util.IOUtil;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 public class FileRepository<T extends FileStorage> extends StorageRepositoryImpl<T> implements StorageRepository<T> {
 
@@ -20,6 +21,26 @@ public class FileRepository<T extends FileStorage> extends StorageRepositoryImpl
         InputStream fis = getInputStream(context, filename);
 
         return (fis == null) ? storage : (T) IOUtil.readObjectFromMemory(fis);
+    }
+
+    @Override
+    public boolean saveData(T storage) {
+        Context context = getApplicationContext();
+        String filename = storage.getFileName();
+
+        OutputStream fos = getOutputStream(context, filename);
+        return (fos == null) ? false : IOUtil.writeObjectToDisk(fos, storage);
+    }
+
+    private OutputStream getOutputStream(Context context, String filename) {
+        OutputStream fos = null;
+        try {
+            fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            System.out.println("fos = " + fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return fos;
     }
 
     private InputStream getInputStream(Context context, String filename) {
