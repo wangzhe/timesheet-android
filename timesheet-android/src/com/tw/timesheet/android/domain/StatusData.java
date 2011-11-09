@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class StatusData implements Serializable {
 
-
     private String username;
     private UserResource userResource;
 

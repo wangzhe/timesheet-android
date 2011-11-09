@@ -5,4 +5,11 @@
     <string name="username_label">User Name</string>
     <string name="status_text">Please input account info</string>
     <string name="active_setting">Active background setting</string>
+    <string name="week_day_mon_text">Mon</string>
+    <string name="week_day_tue_text">Tue</string>
+    <string name="week_day_wed_text">Wed</string>
+    <string name="week_day_thu_text">Thu</string>
+    <string name="week_day_fri_text">Fri</string>
+    <string name="week_day_sat_text">Sat</string>
+    <string name="week_day_sun_text">Sun</string>
 </resources>
