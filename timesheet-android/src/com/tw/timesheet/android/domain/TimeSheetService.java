@@ -18,7 +18,6 @@ public class TimeSheetService {
         TimeSheetSummary timeSheetSummary;
         HttpPost request = new TWTEHttpRequestComposer().createTimeSheetRequest(userResource.getURI(SEARCH_REQUIRE_URI));
         response = dataServer.postHttpRequest(request);
-        System.out.println("response = " + response);
         timeSheetSummary = new TimeSheetSummary.TimeSheetSummaryParser().parse(response);
         return timeSheetSummary;
     }

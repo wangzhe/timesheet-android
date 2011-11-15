@@ -5,6 +5,7 @@ import android.widget.ListView;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.TimeSheetContentView;
 import com.tw.timesheet.android.domain.StatusData;
+import com.tw.timesheet.android.domain.TimeSheetEntry;
 import com.tw.timesheet.android.presenter.TimeSheetContentPresenter;
 import com.tw.timesheet.android.system.DeviceSystem;
 import com.tw.timesheet.android.widget.TimeSheetEntryView;
@@ -39,5 +40,10 @@ public class TimeSheetSummaryActivity extends TimeSheetActivity implements TimeS
 
     @Override
     public void appendTimeSheetEntry(TimeSheetEntryView entryView) {
+    }
+
+    @Override
+    public TimeSheetEntryView createTimeSheetEntryView(TimeSheetEntry entry) {
+        return null;
     }
 }
