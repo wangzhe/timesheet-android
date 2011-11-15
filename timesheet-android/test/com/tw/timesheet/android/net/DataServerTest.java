@@ -28,7 +28,7 @@ public class DataServerTest {
         httpResponse = mock(HttpResponse.class);
         httpClient = new TWTEHttpClientBuilder().response(httpResponse).build();
         dataServer = DataServer.createDataServer(httpClient);
-        request = new TWTEHttpRequestComposer().getPostRequest("http://te.thoughtworks.com/project?start=proj te 11", "content", HTTP.UTF_8);
+        request = new TWTEHttpRequestComposer().createLoginRequest("http://te.thoughtworks.com/project?start=proj te 11", "content", HTTP.UTF_8);
     }
 
     @Test

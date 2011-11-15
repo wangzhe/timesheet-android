@@ -1,6 +1,6 @@
 {
     "string" : "string_value",
-    "double" : 2.2,
+    "boolean" : true,
     "array": [
         {"array_a": "value_a"},
         {"array_b": "value_b"},

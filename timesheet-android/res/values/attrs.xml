@@ -14,6 +14,10 @@
         <attr name="labelText"/>
     </declare-styleable>
 
+    <declare-styleable name="TitleBar">
+        <attr name="labelText"/>
+    </declare-styleable>
+
     <declare-styleable name="ContactAgent">
         <attr name="labelText"/>
         <attr name="android:enabled"/>
@@ -37,10 +41,6 @@
 
     <declare-styleable name="ReaTextView">
         <attr name="isBold"/>
-    </declare-styleable>
-
-    <declare-styleable name="TitleBar">
-        <attr name="labelText"/>
     </declare-styleable>
 
     <declare-styleable name="RefineSearchItemWithCheckbox">

@@ -16,13 +16,16 @@ public class DataServer {
     public static DataServer createDataServer(TWTEHttpClient httpClient) {
         return new DataServer(httpClient);
     }
-    
+
     public String postHttpRequest(HttpPost request) {
         try {
             HttpResponse response = httpClient.execute(request);
             int statusCode = response.getStatusLine().getStatusCode();
+            System.out.println("statusCode = " + statusCode);
             if (isSuccess(statusCode)) {
+                System.out.println("response.getEntity() = " + response.getEntity().getContentLength());
                 responseContent = EntityUtils.toString(response.getEntity());
+                System.out.println("response3 = " + responseContent);
                 return responseContent;
             }
             throw new Exception("error status code: " + statusCode);

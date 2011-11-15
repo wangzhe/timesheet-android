@@ -3,16 +3,16 @@ package com.tw.timesheet.android.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.MainActivityView;
 import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.presenter.MainActivityPresenter;
+import com.tw.timesheet.android.widget.TitleBar;
 
 public class MainActivity extends TimeSheetActivity implements MainActivityView {
 
     MainActivityPresenter presenter = new MainActivityPresenter(this);
-    private TextView title;
+    private TitleBar titleBar;
     private Button insertTimeSheetButton;
     private Button viewTimeSheetButton;
     private Button settingButton;
@@ -31,10 +31,10 @@ public class MainActivity extends TimeSheetActivity implements MainActivityView 
     }
 
     protected void initUI() {
-        insertTimeSheetButton = (Button) findViewById(R.id.bt_add_time_sheet);
-        viewTimeSheetButton = (Button) findViewById(R.id.bt_edit_time_sheet);
+        insertTimeSheetButton = (Button) findViewById(R.id.main_screen_add_time_sheet_button);
+        viewTimeSheetButton = (Button) findViewById(R.id.main_screen_edit_time_sheet_button);
         settingButton = (Button) findViewById(R.id.bt_setting);
-        title = (TextView) findViewById(R.id.main_screen_username_label);
+        titleBar = (TitleBar) findViewById(R.id.main_screen_title_bar);
         presenter.initUI();
     }
 
@@ -55,7 +55,7 @@ public class MainActivity extends TimeSheetActivity implements MainActivityView 
 
     @Override
     public void setTitleText(String prompt) {
-        title.setText(prompt);
+        titleBar.setLabelText(prompt);
     }
 }
 

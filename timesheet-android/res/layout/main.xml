@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView
-    android:id="@+id/main_screen_username_label"
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello Timesheet, MainActivity"
-    />
-<Button android:id="@+id/bt_add_time_sheet"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Timesheet"
-        />
-<Button android:id="@+id/bt_edit_time_sheet"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="View Timesheet"
-        />
-<Button android:id="@+id/bt_setting"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Setting"
-        />
+              xmlns:attr="http://schemas.android.com/apk/res/com.tw.timesheet.android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:fadingEdge="none"
+              android:background="@drawable/item_background">
+    <com.tw.timesheet.android.widget.TitleBar android:id="@+id/main_screen_title_bar"
+                                              android:layout_width="fill_parent"
+                                              android:layout_height="wrap_content"
+                                              attr:labelText="Hello Timesheet, MainActivity"/>
+    <RelativeLayout android:layout_width="fill_parent"
+                    android:layout_height="wrap_content">
+        <Button android:id="@+id/main_screen_add_time_sheet_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Add Timesheet"/>
+        <Button android:id="@+id/main_screen_edit_time_sheet_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="View Timesheet"
+                android:layout_alignParentRight="true"/>
+        <Button android:id="@+id/main_screen_add_expense_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Add Expense"
+                android:layout_below="@id/main_screen_add_time_sheet_button"/>
+        <Button android:id="@+id/main_screen_edit_expense_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="View Expense"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/main_screen_add_time_sheet_button"/>
+        <Button android:id="@+id/bt_setting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="SETTING"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@id/main_screen_add_expense_button"/>
+    </RelativeLayout>
 </LinearLayout>
 

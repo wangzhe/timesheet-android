@@ -13,7 +13,7 @@ public class TWTEHttpRequestComposer {
     public static final String SEARCH_HEADER_ACCEPT_ENCODING = "gzip, deflate";
     public static final String SEARCH_HEADER_CONTENT_TYPE = "application/vnd.tw.insert.doc+json";
 
-    public HttpPost getPostRequest(String url, String content, String encoding) {
+    public HttpPost createLoginRequest(String url, String content, String encoding) {
         HttpPost request = null;
         try {
             request = new HttpPost(encodeUri(url));
@@ -39,4 +39,11 @@ public class TWTEHttpRequestComposer {
         return url.replace(" ", "%20");
     }
 
+    public HttpPost createTimeSheetRequest(String url) {
+        HttpPost request = new HttpPost(encodeUri(url));
+        setHeaders(request, new BasicHeader("accept", SEARCH_HEADER_ACCEPT),
+                new BasicHeader("accept-encoding", SEARCH_HEADER_ACCEPT_ENCODING),
+                new BasicHeader("content-type", SEARCH_HEADER_CONTENT_TYPE));
+        return request;
+    }
 }

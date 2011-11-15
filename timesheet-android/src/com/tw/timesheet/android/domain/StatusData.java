@@ -19,4 +19,8 @@ public class StatusData implements Serializable {
     public String getUsername() {
         return username;
     }
+
+    public UserResource getUserResource() {
+        return userResource;
+    }
 }

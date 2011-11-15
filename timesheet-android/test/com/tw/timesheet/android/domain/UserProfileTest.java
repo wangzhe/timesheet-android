@@ -113,7 +113,7 @@ public class UserProfileTest {
     @Test
     public void should_login_unsuccessful_when_return_login_parsing_failed() throws FileNotFoundException {
         UserProfile userProfile = new UserProfile("userA", "pwdA");
-        FileInputStream fis = new FileInputStream("test/com/tw/timesheet/android/json/invalidate_login_response.json");
+        FileInputStream fis = new FileInputStream("test/com/tw/timesheet/android/json/login_invalidate_response.json");
         String response = IOUtil.getStringFromStream(fis);
         when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
         DataServer dataServer = mock(DataServer.class);

@@ -28,7 +28,7 @@ public class UserProfile implements FileStorage {
         String response;
         UserResource userResource;
         try {
-            HttpPost request = new TWTEHttpRequestComposer().getPostRequest("", "", HTTP.UTF_8);
+            HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("", "", HTTP.UTF_8);
             response = dataServer.postHttpRequest(request);
             userResource = new UserResource.UserResourceParser().parse(response);
         } catch (ConnectionTimeoutException cte) {

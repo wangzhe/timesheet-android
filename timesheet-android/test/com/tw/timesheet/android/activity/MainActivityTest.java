@@ -39,8 +39,8 @@ public class MainActivityTest {
         presenter.setListeners();
 
 
-        insertTimeSheetButton = (Button) mainActivity.findViewById(R.id.bt_add_time_sheet);
-        viewTimeSheetButton = (Button) mainActivity.findViewById(R.id.bt_edit_time_sheet);
+        insertTimeSheetButton = (Button) mainActivity.findViewById(R.id.main_screen_add_time_sheet_button);
+        viewTimeSheetButton = (Button) mainActivity.findViewById(R.id.main_screen_edit_time_sheet_button);
         settingButton = (Button) mainActivity.findViewById(R.id.bt_setting);
     }
 

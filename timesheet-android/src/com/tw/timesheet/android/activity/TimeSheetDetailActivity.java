@@ -2,8 +2,11 @@ package com.tw.timesheet.android.activity;
 
 import android.os.Bundle;
 import com.tw.timesheet.android.R;
+import com.tw.timesheet.android.system.DeviceSystem;
 
-public class TimeSheetDetailActivity extends TimeSheetActivity {
+public class TimeSheetDetailActivity extends TimeSheetActivity implements DeviceSystem {
+
+//    TimeSheetContentPresenter presenter = new TimeSheetContentPresenter(this, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,7 @@ public class TimeSheetDetailActivity extends TimeSheetActivity {
     }
 
     private void bindData() {
-
+//        presenter.setStatusData((StatusData) getIntent().getSerializableExtra("statusData"));
     }
 
     private void initUI() {
