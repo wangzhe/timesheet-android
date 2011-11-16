@@ -23,7 +23,7 @@ public class MainActivity extends TimeSheetActivity implements MainActivityView 
         setContentView(R.layout.main);
         bindData();
         initUI();
-        presenter.setListeners();
+        setListeners(presenter);
     }
 
     protected void bindData() {
@@ -51,6 +51,31 @@ public class MainActivity extends TimeSheetActivity implements MainActivityView 
     @Override
     public void setSettingButtonOnClickListener(View.OnClickListener listener) {
         settingButton.setOnClickListener(listener);
+    }
+
+    @Override
+    public void setListeners(final MainActivityPresenter mainActivityPresenter) {
+        setInsertTimeSheetButtonOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                mainActivityPresenter.addTimeSheetButtonClicked();
+            }
+        });
+
+        setViewTimeSheetButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivityPresenter.viewTimeSheetButtonClicked();
+            }
+        });
+
+        setSettingButtonOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivityPresenter.settingButtonClicked();
+            }
+        });
     }
 
     @Override

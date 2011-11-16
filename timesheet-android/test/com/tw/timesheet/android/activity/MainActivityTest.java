@@ -36,7 +36,6 @@ public class MainActivityTest {
         mainActivity.setIntent(newIntent);
         mainActivity.onCreate(null);
         presenter.setStatusData(statusData);
-        presenter.setListeners();
 
 
         insertTimeSheetButton = (Button) mainActivity.findViewById(R.id.main_screen_add_time_sheet_button);

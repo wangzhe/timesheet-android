@@ -1,6 +1,5 @@
 package com.tw.timesheet.android.presenter;
 
-import android.view.View;
 import com.tw.timesheet.android.activity.SettingActivity;
 import com.tw.timesheet.android.activity.TimeSheetDetailActivity;
 import com.tw.timesheet.android.activity.TimeSheetSummaryActivity;
@@ -39,24 +38,5 @@ public class MainActivityPresenter {
 
     public void initUI() {
         viewer.setTitleText("Hello " + statusData.getUsername() + ", this is Main View");
-    }
-
-    public void setListeners() {
-        viewer.setInsertTimeSheetButtonOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                addTimeSheetButtonClicked();
-            }
-        });
-        viewer.setViewTimeSheetButtonOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                viewTimeSheetButtonClicked();
-            }
-        });
-        viewer.setSettingButtonOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                System.out.println("clicked = " + "clicked");
-                settingButtonClicked();
-            }
-        });
     }
 }
