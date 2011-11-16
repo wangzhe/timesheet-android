@@ -40,11 +40,6 @@ public class TimeSheetContentTask extends AsyncTask<Void, Void, TimeSheetSummary
     }
 
     @Override
-    protected void onProgressUpdate(Void... values) {
-        super.onProgressUpdate(values);
-    }
-
-    @Override
     protected void onPostExecute(TimeSheetSummary timeSheetSummary) {
         for (int i = 0; i < timeSheetSummary.size(); i++) {
             TimeSheetEntryView entryView = new TimeSheetContentWidgetPresenter(viewer).composeTimeSheetEntryView(timeSheetSummary.getEntry(i));

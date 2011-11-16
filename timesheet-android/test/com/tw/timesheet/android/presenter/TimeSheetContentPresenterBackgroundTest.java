@@ -55,7 +55,7 @@ public class TimeSheetContentPresenterBackgroundTest {
         when(device.getActiveNetworkInfo()).thenReturn(networkInfo);
 
         Robolectric.getBackgroundScheduler().pause();
-        Robolectric.addPendingHttpResponse(new TwHttpResponseStub());
+        Robolectric.addPendingHttpResponse(new TwHttpResponseStub(TwHttpResponseStub.TIME_SHEET_WITH_THREE_ENTRY));
 
         presenter.startFetchTimeSheetContent();
 
@@ -64,6 +64,23 @@ public class TimeSheetContentPresenterBackgroundTest {
         assertThat(viewer.summaryList.size(), is(3));
     }
 
+    @Test
+    public void should_add_nothing_to_list_view_when_fetch_none_time_sheet_content() throws Exception {
+        NetworkInfo networkInfo = mock(NetworkInfo.class);
+        when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
+        when(device.getActiveNetworkInfo()).thenReturn(networkInfo);
+
+        Robolectric.getBackgroundScheduler().pause();
+        Robolectric.addPendingHttpResponse(new TwHttpResponseStub(TwHttpResponseStub.TIME_SHEET_WITH_NONE_ENTRY));
+        
+        presenter.startFetchTimeSheetContent();
+
+        Robolectric.getBackgroundScheduler().runOneTask();
+
+        assertThat(viewer.summaryList.size(), is(0));
+        
+    }
+    
     private class TimeSheetContentViewStub implements TimeSheetContentView {
         public List<View> summaryList;
 
@@ -83,6 +100,14 @@ public class TimeSheetContentPresenterBackgroundTest {
     }
 
     private class TwHttpResponseStub extends HttpResponseStub {
+
+        public static final String TIME_SHEET_WITH_THREE_ENTRY = "test/com/tw/timesheet/android/json/time_sheet_response_validation.json";
+        public static final String TIME_SHEET_WITH_NONE_ENTRY = "test/com/tw/timesheet/android/json/time_sheet_with_none_entry_response_validation.json";
+        private String time_sheet_with_entry_file;
+
+        protected TwHttpResponseStub(String time_sheet_with_entry_file) {
+            this.time_sheet_with_entry_file = time_sheet_with_entry_file;
+        }
 
         public StatusLine getStatusLine() {
             return new StatusLine() {
@@ -133,7 +158,7 @@ public class TimeSheetContentPresenterBackgroundTest {
 
                 @Override
                 public InputStream getContent() throws IOException, IllegalStateException {
-                    return new FileInputStream("test/com/tw/timesheet/android/json/time_sheet_response_validation.json");
+                    return new FileInputStream(time_sheet_with_entry_file);
                 }
 
                 @Override

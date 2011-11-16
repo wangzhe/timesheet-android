@@ -6,7 +6,6 @@ import org.apache.http.util.EntityUtils;
 
 public class DataServer {
 
-    private String responseContent;
     private TWTEHttpClient httpClient;
 
     public DataServer(TWTEHttpClient httpClient) {
@@ -21,12 +20,8 @@ public class DataServer {
         try {
             HttpResponse response = httpClient.execute(request);
             int statusCode = response.getStatusLine().getStatusCode();
-            System.out.println("statusCode = " + statusCode);
             if (isSuccess(statusCode)) {
-                System.out.println("response.getEntity() = " + response.getEntity().getContentLength());
-                responseContent = EntityUtils.toString(response.getEntity());
-                System.out.println("response3 = " + responseContent);
-                return responseContent;
+                return EntityUtils.toString(response.getEntity());
             }
             throw new Exception("error status code: " + statusCode);
         } catch (Exception e) {

@@ -15,7 +15,7 @@
         <fileset dir="${sdk.dir}/platforms/android-8">
             <include name="*.jar"/>
         </fileset>
-        <fileset dir="${sdk.dir}/add-ons/addon_google_apis_google_inc_8/libs">
+        <fileset dir="${sdk.addon.libs}">
             <include name="*.jar"/>
         </fileset>
     </path>
@@ -35,7 +35,6 @@
     </target>
 
     <taskdef classpathref="test.classpath" resource="tasks.properties"/>
-
     <!-- Custom Android task to deal with the project target, and import the
          proper rules.
          This requires ant 1.6.0 or above. -->

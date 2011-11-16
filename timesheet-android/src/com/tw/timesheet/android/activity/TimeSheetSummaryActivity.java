@@ -44,6 +44,6 @@ public class TimeSheetSummaryActivity extends TimeSheetActivity implements TimeS
 
     @Override
     public TimeSheetEntryView createTimeSheetEntryView(TimeSheetEntry entry) {
-        return null;
+        return new TimeSheetEntryView(getApplication().getApplicationContext(), entry);
     }
 }

@@ -1,0 +1,14 @@
+{
+    "results": [
+    ],
+    "links" : [
+        {
+            "uri" : "http://time.sheet.host/userA/self_link",
+            "rel" : "self"
+        },
+        {
+            "uri" : "http://time.sheet.host/userA/next_link",
+            "rel" : "next"
+        }
+    ]
+}
