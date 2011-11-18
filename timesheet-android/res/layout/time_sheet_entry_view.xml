@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <RelativeLayout android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+        <TextView android:id="@+id/time_sheet_entry_view_action"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="submitted"
+                  android:textSize="15sp"
+                  android:layout_alignParentRight="true"/>
+        <TextView android:id="@+id/time_sheet_entry_view_week_ending_date"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="13-Nov-2011"
+                  android:textSize="15sp"
+                  android:gravity="left"
+                  android:layout_toLeftOf="@id/time_sheet_entry_view_action"/>
+    </RelativeLayout>
+    <LinearLayout android:layout_height="wrap_content"
+                  android:layout_width="fill_parent"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/time_sheet_entry_view_billable_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Billable"
+                  android:textSize="15sp"/>
+        <TextView android:id="@+id/time_sheet_entry_view_billable_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Billable"
+                  android:textSize="15sp"/>
+        <TextView android:id="@+id/time_sheet_entry_view_non_billable_text"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="13-Nov-2011"
+                  android:textSize="15sp"/>
+        <TextView android:id="@+id/time_sheet_entry_view_non_billable_value"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="13-Nov-2011"
+                  android:textSize="15sp"/>
+    </LinearLayout>
+</LinearLayout>

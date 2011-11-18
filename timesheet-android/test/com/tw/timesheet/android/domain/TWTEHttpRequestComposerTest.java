@@ -19,22 +19,23 @@ public class TWTEHttpRequestComposerTest {
 
     @Test
     public void should_replace_space_signal_mark() throws UnsupportedEncodingException {
-        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("space to space", "content", HTTP.UTF_8);
-        assertThat(request.getURI().toString(), is("space%20to%20space"));
+        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("/space to space", "content", HTTP.UTF_8);
+
+        assertThat(request.getURI().toString(), is("http://10.18.3.195:8000/space%20to%20space"));
     }
 
     @Test
     public void should_contain_header_infos() throws UnsupportedEncodingException {
-        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("space to space", "content", HTTP.UTF_8);
+        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("/space to space", "content", HTTP.UTF_8);
 
-        assertThat(request.getFirstHeader("accept").getValue(), is("application/vnd.tw.tesearchresults+json"));
+        assertThat(request.getFirstHeader("accept").getValue(), is("application/vnd.tw.te.userresults+json"));
         assertThat(request.getFirstHeader("accept-encoding").getValue(), is("gzip, deflate"));
-        assertThat(request.getFirstHeader("content-type").getValue(), is("application/vnd.tw.insert.doc+json"));
+        assertThat(request.getFirstHeader("content-type").getValue(), is("application/vnd.tw.te.user.doc+json"));
     }
 
     @Test
     public void should_contain_content_infos() throws IOException {
-        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("space to space", "content", HTTP.UTF_8);
+        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("/space to space", "content", HTTP.UTF_8);
 
         byte[] buff = new byte[1024];
         request.getEntity().getContent().read(buff);
@@ -47,10 +48,19 @@ public class TWTEHttpRequestComposerTest {
 
     @Test
     public void should_return_null_when_encounter_unsupported_encoding_exception() {
-        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("space to space", "content", "xxx");
+        HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("/space to space", "content", "xxx");
 
         assertThat(request, IsNull.<Object>nullValue());
     }
 
+    @Test
+    public void should_return_contain_correct_time_sheet_content_request_infos() {
+        HttpPost request = new TWTEHttpRequestComposer().createTimeSheetRequest("/space to space");
 
+        assertThat(request.getURI().toString(), is("http://10.18.3.195:8000/space%20to%20space"));
+        assertThat(request.getFirstHeader("accept").getValue(), is("application/vnd.tw.te.searchresults+json"));
+        assertThat(request.getFirstHeader("accept-encoding").getValue(), is("gzip, deflate"));
+        assertThat(request.getFirstHeader("content-type").getValue(), is("application/vnd.tw.te.search.doc+json"));
+
+    }
 }

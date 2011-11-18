@@ -1,11 +1,15 @@
 package com.tw.timesheet.android.activity.callback;
 
 import com.tw.timesheet.android.domain.TimeSheetEntry;
+import com.tw.timesheet.android.domain.TimeSheetSummary;
 import com.tw.timesheet.android.widget.TimeSheetEntryView;
+import com.tw.timesheet.android.widget.interfaces.ITimeSheetEntryView;
 
 public interface TimeSheetContentView {
     
-    void appendTimeSheetEntry(TimeSheetEntryView entryView);
+    void appendTimeSheetSummary(TimeSheetSummary summary);
 
-    TimeSheetEntryView createTimeSheetEntryView(TimeSheetEntry entry);
+    ITimeSheetEntryView createTimeSheetEntryView(TimeSheetEntry entry);
+
+    
 }

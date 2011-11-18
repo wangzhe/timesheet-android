@@ -1,5 +1,7 @@
 package com.tw.timesheet.android.domain;
 
+import com.tw.timesheet.android.net.DataServer;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
@@ -9,18 +11,23 @@ import java.io.UnsupportedEncodingException;
 
 public class TWTEHttpRequestComposer {
 
-    public static final String SEARCH_HEADER_ACCEPT = "application/vnd.tw.tesearchresults+json";
-    public static final String SEARCH_HEADER_ACCEPT_ENCODING = "gzip, deflate";
-    public static final String SEARCH_HEADER_CONTENT_TYPE = "application/vnd.tw.insert.doc+json";
+    public static final String LOGIN_HEADER_ACCEPT = "application/vnd.tw.te.userresults+json";
+    public static final String LOGIN_HEADER_ACCEPT_ENCODING = "gzip, deflate";
+    public static final String LOGIN_HEADER_CONTENT_TYPE = "application/vnd.tw.te.user.doc+json";
+
+
+    public static final String TIME_SHEET_SEARCH_HEADER_ACCEPT = "application/vnd.tw.te.searchresults+json";
+    public static final String TIME_SHEET_SEARCH_HEADER_ACCEPT_ENCODING = "gzip, deflate";
+    public static final String TIME_SHEET_SEARCH_HEADER_CONTENT_TYPE = "application/vnd.tw.te.search.doc+json";
 
     public HttpPost createLoginRequest(String url, String content, String encoding) {
         HttpPost request = null;
         try {
-            request = new HttpPost(encodeUri(url));
+            request = new HttpPost(encodeUri(DataServer.SERVER_ADDRESS + url));
+            setHeaders(request, new BasicHeader("accept", LOGIN_HEADER_ACCEPT),
+                    new BasicHeader("accept-encoding", LOGIN_HEADER_ACCEPT_ENCODING),
+                    new BasicHeader("content-type", LOGIN_HEADER_CONTENT_TYPE));
             setEntity(request, content, encoding);
-            setHeaders(request, new BasicHeader("accept", SEARCH_HEADER_ACCEPT),
-                    new BasicHeader("accept-encoding", SEARCH_HEADER_ACCEPT_ENCODING),
-                    new BasicHeader("content-type", SEARCH_HEADER_CONTENT_TYPE));
         } catch (UnsupportedEncodingException e) {
             return null;
         }
@@ -40,10 +47,18 @@ public class TWTEHttpRequestComposer {
     }
 
     public HttpPost createTimeSheetRequest(String url) {
-        HttpPost request = new HttpPost(encodeUri(url));
-        setHeaders(request, new BasicHeader("accept", SEARCH_HEADER_ACCEPT),
-                new BasicHeader("accept-encoding", SEARCH_HEADER_ACCEPT_ENCODING),
-                new BasicHeader("content-type", SEARCH_HEADER_CONTENT_TYPE));
+        HttpPost request = new HttpPost(encodeUri(DataServer.SERVER_ADDRESS + url));
+        setHeaders(request, new BasicHeader("accept", TIME_SHEET_SEARCH_HEADER_ACCEPT),
+                new BasicHeader("accept-encoding", TIME_SHEET_SEARCH_HEADER_ACCEPT_ENCODING),
+                new BasicHeader("content-type", TIME_SHEET_SEARCH_HEADER_CONTENT_TYPE));
+        return request;
+    }
+
+    public HttpGet createTimeSheetRequestGet(String url) {
+        HttpGet request = new HttpGet(encodeUri(DataServer.SERVER_ADDRESS + url));
+        setHeaders(request, new BasicHeader("accept", TIME_SHEET_SEARCH_HEADER_ACCEPT),
+                new BasicHeader("accept-encoding", TIME_SHEET_SEARCH_HEADER_ACCEPT_ENCODING),
+                new BasicHeader("content-type", TIME_SHEET_SEARCH_HEADER_CONTENT_TYPE));
         return request;
     }
 }

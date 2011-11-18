@@ -133,7 +133,7 @@ public class UserProfileTest {
 
         UserResource userResource = userProfile.login(networkInfo, dataServer);
         assertThat(userResource, IsNull.<UserResource>notNullValue());
-        assertThat(userResource.getURI(""), is("/userAX/"));
+        assertThat(userResource.getURI(""), is("/userAX"));
     }
 
     @Test

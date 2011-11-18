@@ -40,7 +40,7 @@ public class StartPageActivityPresenter {
         UserProfile userProfile = storageRepository.loadData(new UserProfile());
         view.startNextActivity(
                 getNextActivityByUserProfileStatus(userProfile),
-                new StatusData(userProfile.getUsername()));
+                new StatusData(userProfile.getUsername(), userResource));
         view.closeActivity();
     }
 

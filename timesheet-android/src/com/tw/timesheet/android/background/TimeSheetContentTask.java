@@ -9,9 +9,7 @@ import com.tw.timesheet.android.domain.TimeSheetSummary;
 import com.tw.timesheet.android.domain.UserResource;
 import com.tw.timesheet.android.net.DataServer;
 import com.tw.timesheet.android.net.TWTEHttpClient;
-import com.tw.timesheet.android.presenter.TimeSheetContentWidgetPresenter;
 import com.tw.timesheet.android.system.DeviceSystem;
-import com.tw.timesheet.android.widget.TimeSheetEntryView;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 public class TimeSheetContentTask extends AsyncTask<Void, Void, TimeSheetSummary> {
@@ -41,10 +39,8 @@ public class TimeSheetContentTask extends AsyncTask<Void, Void, TimeSheetSummary
 
     @Override
     protected void onPostExecute(TimeSheetSummary timeSheetSummary) {
-        for (int i = 0; i < timeSheetSummary.size(); i++) {
-            TimeSheetEntryView entryView = new TimeSheetContentWidgetPresenter(viewer).composeTimeSheetEntryView(timeSheetSummary.getEntry(i));
-            viewer.appendTimeSheetEntry(entryView);
-        }
+        if(timeSheetSummary == null) return;
+        viewer.appendTimeSheetSummary(timeSheetSummary);
     }
 
 }

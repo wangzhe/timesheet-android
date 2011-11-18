@@ -32,10 +32,12 @@
     <orderEntry type="library" scope="TEST" name="junit_lib" level="project" />
     <orderEntry type="library" name="http_client_lib" level="project" />
     <orderEntry type="library" name="function_test_client_lib" level="project" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Android 2.2 Google APIs" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="cobertura_lib" level="project" />
     <orderEntry type="library" scope="TEST" name="roboletric_lib" level="project" />
+    <orderEntry type="library" name="time-sheet" level="application" />
+    <orderEntry type="library" name="time-sheet" level="application" />
   </component>
 </module>
 

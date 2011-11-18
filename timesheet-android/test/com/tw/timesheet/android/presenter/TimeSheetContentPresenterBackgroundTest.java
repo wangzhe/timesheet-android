@@ -1,13 +1,15 @@
 package com.tw.timesheet.android.presenter;
 
+import android.app.Activity;
 import android.net.NetworkInfo;
-import android.view.View;
 import com.tw.timesheet.android.activity.callback.TimeSheetContentView;
 import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.domain.TimeSheetEntry;
+import com.tw.timesheet.android.domain.TimeSheetSummary;
 import com.tw.timesheet.android.domain.UserResource;
 import com.tw.timesheet.android.system.DeviceSystem;
 import com.tw.timesheet.android.widget.TimeSheetEntryView;
+import com.tw.timesheet.android.widget.interfaces.ITimeSheetEntryView;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.tester.org.apache.http.HttpResponseStub;
@@ -43,7 +45,7 @@ public class TimeSheetContentPresenterBackgroundTest {
     public void setUp() {
         viewer = new TimeSheetContentViewStub();
         device = mock(DeviceSystem.class);
-        statusData = new StatusData("userA", new UserResource("users/"));
+        statusData = new StatusData("userA", new UserResource("/users"));
         presenter = new TimeSheetContentPresenter(viewer, device);
         presenter.setStatusData(statusData);
     }
@@ -72,30 +74,49 @@ public class TimeSheetContentPresenterBackgroundTest {
 
         Robolectric.getBackgroundScheduler().pause();
         Robolectric.addPendingHttpResponse(new TwHttpResponseStub(TwHttpResponseStub.TIME_SHEET_WITH_NONE_ENTRY));
-        
+
         presenter.startFetchTimeSheetContent();
 
         Robolectric.getBackgroundScheduler().runOneTask();
 
         assertThat(viewer.summaryList.size(), is(0));
-        
+
+    }
+
+    @Test
+    public void should_add_nothing_to_list_view_when_fetch_response_is_null() throws Exception {
+        NetworkInfo networkInfo = mock(NetworkInfo.class);
+        when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
+        when(device.getActiveNetworkInfo()).thenReturn(networkInfo);
+
+        Robolectric.getBackgroundScheduler().pause();
+        Robolectric.addPendingHttpResponse(null);
+
+        presenter.startFetchTimeSheetContent();
+
+        Robolectric.getBackgroundScheduler().runOneTask();
+
+        assertThat(viewer.summaryList.size(), is(0));
+
     }
     
     private class TimeSheetContentViewStub implements TimeSheetContentView {
-        public List<View> summaryList;
+        public List<TimeSheetEntry> summaryList;
 
         private TimeSheetContentViewStub() {
-            this.summaryList = new ArrayList<View>();
+            this.summaryList = new ArrayList<TimeSheetEntry>();
         }
 
         @Override
-        public void appendTimeSheetEntry(TimeSheetEntryView entryView) {
-            summaryList.add(entryView);
+        public void appendTimeSheetSummary(TimeSheetSummary summary) {
+            for (int i = 0; i < summary.size(); i++) {
+                summaryList.add(summary.getEntry(i));
+            }
         }
 
         @Override
-        public TimeSheetEntryView createTimeSheetEntryView(TimeSheetEntry entry) {
-            return new TimeSheetEntryView(null, null);
+        public ITimeSheetEntryView createTimeSheetEntryView(TimeSheetEntry entry) {
+            return new TimeSheetEntryView(new Activity(), entry);
         }
     }
 

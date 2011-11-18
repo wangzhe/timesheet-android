@@ -3,6 +3,7 @@ package com.tw.timesheet.android.domain;
 import android.net.NetworkInfo;
 import com.tw.timesheet.android.net.DataServer;
 import com.tw.timesheet.android.util.IOUtil;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
@@ -38,7 +39,7 @@ public class TimeSheetServiceTest {
     public void should_return_correct_size_with_correct_content_after_read_validate_time_sheet_json() throws FileNotFoundException {
         FileInputStream fis = new FileInputStream("test/com/tw/timesheet/android/json/time_sheet_response_validation.json");
         String response = IOUtil.getStringFromStream(fis);
-        when(dataServer.postHttpRequest(Matchers.<HttpPost>any())).thenReturn(response);
+        when(dataServer.getHttpRequest(Matchers.<HttpGet>any())).thenReturn(response);
         when(networkInfo.isConnectedOrConnecting()).thenReturn(true);
 
         TimeSheetSummary timeSheetSummary = timesheet.fetch(networkInfo, dataServer, userResource);
