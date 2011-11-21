@@ -21,8 +21,6 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
     }
 
     private void initUI() {
-        saveButton = (Button) findViewById(R.id.setting_screen_save_button);
-        cancelButton = (Button) findViewById(R.id.setting_screen_cancel_button);
     }
 
     private void bindDate() {

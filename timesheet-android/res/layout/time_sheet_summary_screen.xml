@@ -6,8 +6,11 @@
               android:layout_height="fill_parent"
               android:orientation="vertical"
               android:fadingEdge="none"
-              android:background="@drawable/item_background"
-              android:paddingTop="15dp">
+              android:background="@drawable/item_background">
+    <com.tw.timesheet.android.widget.TitleBar android:id="@+id/time_sheet_summary_screen_title_bar"
+                                              android:layout_width="fill_parent"
+                                              android:layout_height="wrap_content"
+                                              attr:labelText="Summary"/>
     <!--<com.tw.timesheet.android.widget.TimeSheetSummaryItem -->
     <ListView android:id="@+id/time_sheet_summary_screen_list"
               android:layout_width="fill_parent"

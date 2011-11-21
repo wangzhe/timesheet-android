@@ -3,4 +3,8 @@
     <color name="black">#2e2e2e</color>
     <color name="active_setting_text">#2e2e2e</color>
     <color name="title_bar_label_text">#E8E8E8</color>
+    <color name="property_detail_divider_top">#bfbfbf</color>
+    <color name="property_detail_divider_bottom">#99ffffff</color>
+    <color name="property_detail_item_label_text">#767676</color>
+    <color name="setting_item_edit_text">#2e2e2e</color>
 </resources>

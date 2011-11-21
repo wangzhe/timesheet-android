@@ -7,31 +7,51 @@
               android:fadingEdge="none"
               android:background="@drawable/item_background"
               android:orientation="vertical">
-
-    <com.tw.timesheet.android.widget.TitleBar android:id="@+id/main_screen_title_bar"
+    <com.tw.timesheet.android.widget.TitleBar android:id="@+id/setting_screen_title_bar"
                                               android:layout_width="fill_parent"
                                               android:layout_height="wrap_content"
                                               attr:labelText="Setting"/>
-    <TextView
-            android:id="@+id/setting_screen_username_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="this is setting screen"
-            android:textColor="@color/black"
-            />
+    <com.tw.timesheet.android.widget.SettingItemView android:id="@+id/setting_screen_username"
+                                                 android:layout_width="fill_parent"
+                                                 android:layout_height="wrap_content"
+                                                 attr:labelText="Username"
+                                                 attr:itemType="text"/>
+    <include layout="@layout/setting_item_line"/>
+
+    <com.tw.timesheet.android.widget.SettingItemView android:id="@+id/setting_screen_password"
+                                                 android:layout_width="fill_parent"
+                                                 android:layout_height="wrap_content"
+                                                 attr:labelText="Password"
+                                                 attr:itemType="text"/>
+    <include layout="@layout/setting_item_line"/>
+
+    <com.tw.timesheet.android.widget.SettingItemView android:id="@+id/setting_screen_department"
+                                                 android:layout_width="fill_parent"
+                                                 android:layout_height="wrap_content"
+                                                 attr:labelText="Department"
+                                                 attr:itemType="toggle"/>
+    <include layout="@layout/setting_item_line"/>
+
+    <com.tw.timesheet.android.widget.SettingItemView android:id="@+id/setting_screen_country"
+                                                 android:layout_width="fill_parent"
+                                                 android:layout_height="wrap_content"
+                                                 attr:labelText="Country"
+                                                 attr:itemType="text"/>
+    <include layout="@layout/setting_item_line"/>
+
     <RelativeLayout android:id="@+id/setting_screen_active_background_button_area"
-                    android:layout_width="fill_parent" android:layout_height="70dp">
+                    android:layout_width="fill_parent" android:layout_height="wrap_content">
         <RelativeLayout android:id="@+id/setting_screen_active_background_text_area"
                         android:layout_width="fill_parent" android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp">
             <TextView android:id="@+id/setting_screen_active_background_text"
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="@string/active_setting"
                       android:textColor="@color/active_setting_text"
-                      android:textSize="15dp"
+                      android:textSize="12dp"
                       android:shadowColor="@color/white"
                       android:shadowDx="0"
                       android:shadowDy="2.0"
@@ -47,19 +67,38 @@
                       android:layout_height="wrap_content" android:layout_width="wrap_content"
                       android:layout_alignParentRight="true"/>
         </RelativeLayout>
-        <ImageView android:id="@+id/refine_search_channel_shadow"
-                   android:layout_height="6dp" android:layout_width="fill_parent"
-                   android:src="@drawable/shadow_hoz_bottom_top" android:scaleType="fitXY"
-                   android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-    <Button android:id="@+id/setting_screen_save_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"/>
-    <Button android:id="@+id/setting_screen_cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"/>
+
     <ImageView android:layout_height="wrap_content" android:layout_width="fill_parent"
                android:src="@drawable/shadow_hoz_top_bottom" android:scaleType="fitXY"/>
+
+    <TextView android:id="@+id/setting_screen_notification_label"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/property_detail_item_label_text"
+              android:textSize="12sp"
+              android:text="Notification"
+              android:layout_alignParentLeft="true"
+              android:layout_centerVertical="true"
+              android:paddingTop="20dp"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:paddingBottom="12dp"/>
+
+
+    <TextView android:id="@+id/setting_screen_status_label"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/property_detail_item_label_text"
+              android:textSize="12sp"
+              android:text="Status"
+              android:layout_alignParentLeft="true"
+              android:layout_centerVertical="true"
+              android:paddingTop="20dp"
+              android:paddingLeft="12dp"
+              android:paddingRight="12dp"
+              android:paddingBottom="12dp"/>
+
+    <ImageView android:layout_height="wrap_content" android:layout_width="fill_parent"
+               android:src="@drawable/shadow_hoz_bottom_top" android:scaleType="fitXY"/>
 </LinearLayout>

@@ -6,8 +6,12 @@
               android:layout_height="fill_parent"
               android:orientation="vertical"
               android:fadingEdge="none"
-              android:background="@drawable/item_background"
-              android:paddingTop="15dp">
+              android:background="@drawable/item_background">
+    <com.tw.timesheet.android.widget.TitleBar android:id="@+id/time_sheet_detail_screen_title_bar"
+                                              android:layout_width="fill_parent"
+                                              android:layout_height="wrap_content"
+                                              attr:labelText="Timesheet Details"
+                                              android:layout_marginBottom="15dp"/>
     <RelativeLayout android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp">

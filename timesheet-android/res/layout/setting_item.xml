@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+    <TextView android:id="@+id/setting_item_label"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="@color/property_detail_item_label_text"
+              android:textSize="12sp"
+              android:text="label text"
+              android:layout_alignParentLeft="true"
+              android:layout_centerVertical="true"/>
+    <TextView android:id="@+id/setting_item_edit_text"
+              android:textColor="@color/setting_item_edit_text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textStyle="bold"
+              android:typeface="sans"
+              android:textSize="12dp"
+              android:hint="input if empty"
+              android:layout_alignParentRight="true"
+              android:layout_centerVertical="true"
+              android:paddingRight="12dp"
+              android:visibility="gone"/>
+    <ImageView android:id="@+id/setting_item_toggle_img"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/dept_toggle_ps"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:scaleType="fitEnd"
+               android:paddingRight="12dp"/>
+</RelativeLayout>

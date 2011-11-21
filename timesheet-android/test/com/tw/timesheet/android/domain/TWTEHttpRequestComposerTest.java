@@ -21,7 +21,7 @@ public class TWTEHttpRequestComposerTest {
     public void should_replace_space_signal_mark() throws UnsupportedEncodingException {
         HttpPost request = new TWTEHttpRequestComposer().createLoginRequest("/space to space", "content", HTTP.UTF_8);
 
-        assertThat(request.getURI().toString(), is("http://10.18.3.195:8000/space%20to%20space"));
+        assertThat(request.getURI().toString(), is("http://10.18.5.82:8000/space%20to%20space"));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class TWTEHttpRequestComposerTest {
     public void should_return_contain_correct_time_sheet_content_request_infos() {
         HttpPost request = new TWTEHttpRequestComposer().createTimeSheetRequest("/space to space");
 
-        assertThat(request.getURI().toString(), is("http://10.18.3.195:8000/space%20to%20space"));
+        assertThat(request.getURI().toString(), is("http://10.18.5.82:8000/space%20to%20space"));
         assertThat(request.getFirstHeader("accept").getValue(), is("application/vnd.tw.te.searchresults+json"));
         assertThat(request.getFirstHeader("accept-encoding").getValue(), is("gzip, deflate"));
         assertThat(request.getFirstHeader("content-type").getValue(), is("application/vnd.tw.te.search.doc+json"));

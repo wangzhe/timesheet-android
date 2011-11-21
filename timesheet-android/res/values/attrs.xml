@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="itemType">
+        <enum name="text" value="0" />
+        <enum name="toggle" value="1" />
+    </attr>
+    
     <declare-styleable name="common_attr">
         <attr name="labelText" format="string"/>
         <attr name="isBold" format="boolean"/>
         <attr name="hasHeader" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="PropertyDetailsScreen">
-        <attr name="android:galleryItemBackground"/>
+    <declare-styleable name="SettingItem">
+        <attr name="labelText"/>
+        <attr name="itemType"/>
     </declare-styleable>
 
     <declare-styleable name="WeekDayView">
@@ -24,14 +31,6 @@
         <attr name="android:inputType"/>
         <attr name="android:nextFocusDown"/>
         <attr name="android:nextFocusUp"/>
-    </declare-styleable>
-
-    <declare-styleable name="PropertyDetailItem">
-        <attr name="labelText"/>
-        <attr name="text" format="string"/>
-        <attr name="icon" format="string"/>
-        <attr name="android:singleLine"/>
-        <attr name="android:ellipsize"/>
     </declare-styleable>
 
     <declare-styleable name="SearchBar">
