@@ -1,0 +1,102 @@
+{
+    "results": [
+    {
+        "week-end-date": "06-Nov-2011",
+        "last-modified": "07-Nov-2011 @ 19:19:50",
+        "billable-hours": "40.00",
+        "non-billable-hours": "6.00",
+        "totle-hours": "46.00",
+        "status": "submitted",
+        "date": "07-Nov-2011 @ 19:19:50",
+        "activities": [
+        {
+            "location": "CHN",
+            "activity": "REA0001 ANDR_P2 MISC",
+            "billable": true,
+            "task": "description",
+            "mon": "8",
+            "tue": "8",
+            "wed": "8",
+            "thu": "8",
+            "fri": "8",
+            "sat": "0",
+            "sun": "0",
+            "expense": true
+        },
+        {
+            "location": "CHN",
+            "activity": "CLIMATEACTION SIP_P2 MISC",
+            "billable": false,
+            "mon": "0",
+            "tue": "0",
+            "wed": "0",
+            "thu": "0",
+            "fri": "0",
+            "sat": "6",
+            "sun": "0",
+            "expense": false
+        }
+        ]
+    },
+    {
+        "week-end-date": "30-Oct-2011",
+        "last-modified": "28-Oct-2011 @ 04:07:40",
+        "billable-hours": "40.00",
+        "non-billable-hours": "0.00",
+        "totle-hours": "40.00",
+        "status": "submitted",
+        "date": "28-Oct-2011 @ 04:07:40",
+        "activities": [
+        {
+            "location": "CHN",
+            "activity": "REA0001 ANDR_P2 MISC",
+            "billable": true,
+            "task": "description",
+            "mon": "8",
+            "tue": "8",
+            "wed": "8",
+            "thu": "8",
+            "fri": "8",
+            "sat": "0",
+            "sun": "0",
+            "expense": true
+        }
+        ]
+    },
+    {
+        "week-end-date": "23-Oct-2011",
+        "last-modified": "21-Oct-2011 @ 04:25:21",
+        "billable-hours": "40.00",
+        "non-billable-hours": "0.00",
+        "totle-hours": "40.00",
+        "status": "submitted",
+        "date": "21-Oct-2011 @ 04:25:21",
+        "activities": [
+        {
+            "location": "CHN",
+            "activity": "REA0001 ANDR_P2 MISC",
+            "billable": true,
+            "task": "description",
+            "mon": "8",
+            "tue": "8",
+            "wed": "8",
+            "thu": "8",
+            "fri": "8",
+            "sat": "0",
+            "sun": "0",
+            "expense": true
+        }
+        ]
+    }
+    ],
+    "links" : [
+        {
+            "uri" : "http://time.sheet.host/userA/self_link",
+            "rel" : "self"
+        },
+        {
+            "uri" : "http://time.sheet.host/userA/next_link",
+            "rel" : "next"
+        }
+    ]
+}
