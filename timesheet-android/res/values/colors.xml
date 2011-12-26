@@ -6,5 +6,6 @@
     <color name="property_detail_divider_top">#bfbfbf</color>
     <color name="property_detail_divider_bottom">#99ffffff</color>
     <color name="property_detail_item_label_text">#767676</color>
+    <color name="notification_text">#2e2e2e</color>
     <color name="setting_item_edit_text">#2e2e2e</color>
 </resources>

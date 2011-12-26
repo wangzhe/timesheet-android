@@ -3,20 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:attr="http://schemas.android.com/apk/res/com.tw.timesheet.android"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:orientation="vertical"
-              android:fadingEdge="none"
-              android:background="@drawable/item_background">
-    <com.tw.timesheet.android.widget.TitleBar android:id="@+id/time_sheet_detail_screen_title_bar"
-                                              android:layout_width="fill_parent"
-                                              android:layout_height="wrap_content"
-                                              attr:labelText="Timesheet Details"
-                                              android:layout_marginBottom="15dp"/>
-    <!--<ListView android:id="@+id/time_sheet_detail_screen_list_view"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="fill_parent"-->
-    <!--android:background="@drawable/item_background"-->
-    <!--android:fadingEdge="none" android:dividerHeight="0px"/>-->
+              android:layout_height="fill_parent">
     <RelativeLayout android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp">
@@ -87,31 +74,4 @@
             android:layout_height="wrap_content"
             android:text="add description"/>
 
-    <Button android:id="@+id/time_sheet_detail_screen_new"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="new"/>
-
-
-    <LinearLayout android:layout_gravity="center_horizontal"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="12dp">
-
-        <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/time_sheet_detail_screen_mon_hour"
-                                                         android:layout_height="wrap_content"
-                                                         android:layout_width="wrap_content"/>
-        <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/time_sheet_detail_screen_tue_hour"
-                                                         android:layout_height="wrap_content"
-                                                         android:layout_width="wrap_content"/>
-        <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/time_sheet_detail_screen_wed_hour"
-                                                         android:layout_height="wrap_content"
-                                                         android:layout_width="wrap_content"/>
-        <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/time_sheet_detail_screen_thu_hour"
-                                                         android:layout_height="wrap_content"
-                                                         android:layout_width="wrap_content"/>
-        <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/time_sheet_detail_screen_fri_hour"
-                                                         android:layout_height="wrap_content"
-                                                         android:layout_width="wrap_content"/>
-    </LinearLayout>
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.widget.Button;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.domain.StatusData;
+import com.tw.timesheet.android.domain.UserProfile;
 import com.tw.timesheet.android.presenter.MainActivityPresenter;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowActivity;
@@ -30,7 +31,7 @@ public class MainActivityTest {
     public void setUp() throws Exception {
         mainActivity = new MainActivity();
         presenter = new MainActivityPresenter(mainActivity);
-        statusData = new StatusData("userA");
+        statusData = new StatusData(new UserProfile("userA"), null);
         Intent newIntent = new Intent();
         newIntent.putExtra("statusData", statusData);
         mainActivity.setIntent(newIntent);

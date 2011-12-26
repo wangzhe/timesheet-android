@@ -3,10 +3,7 @@ package com.tw.timesheet.android.presenter;
 import android.app.Activity;
 import android.net.NetworkInfo;
 import com.tw.timesheet.android.activity.callback.TimeSheetContentView;
-import com.tw.timesheet.android.domain.StatusData;
-import com.tw.timesheet.android.domain.TimeSheetEntry;
-import com.tw.timesheet.android.domain.TimeSheetSummary;
-import com.tw.timesheet.android.domain.UserResource;
+import com.tw.timesheet.android.domain.*;
 import com.tw.timesheet.android.system.DeviceSystem;
 import com.tw.timesheet.android.widget.TimeSheetEntryView;
 import com.tw.timesheet.android.widget.interfaces.ITimeSheetEntryView;
@@ -45,7 +42,7 @@ public class TimeSheetContentPresenterBackgroundTest {
     public void setUp() {
         viewer = new TimeSheetContentViewStub();
         device = mock(DeviceSystem.class);
-        statusData = new StatusData("userA", new UserResource("/users"));
+        statusData = new StatusData(new UserProfile("userA", ""), new UserResource("/users"));
         presenter = new TimeSheetContentPresenter(viewer, device);
         presenter.setStatusData(statusData);
     }

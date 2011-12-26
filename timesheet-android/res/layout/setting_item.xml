@@ -22,7 +22,6 @@
               android:hint="input if empty"
               android:layout_alignParentRight="true"
               android:layout_centerVertical="true"
-              android:paddingRight="12dp"
               android:visibility="gone"/>
     <ImageView android:id="@+id/setting_item_toggle_img"
                android:layout_width="wrap_content"
@@ -30,6 +29,5 @@
                android:src="@drawable/dept_toggle_ps"
                android:layout_alignParentRight="true"
                android:layout_centerVertical="true"
-               android:scaleType="fitEnd"
-               android:paddingRight="12dp"/>
+               android:scaleType="fitEnd"/>
 </RelativeLayout>

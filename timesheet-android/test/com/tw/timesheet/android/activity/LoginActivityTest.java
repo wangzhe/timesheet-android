@@ -35,7 +35,7 @@ public class LoginActivityTest {
     public void setup() {
         loginActivity = new LoginActivity();
         Intent newIntent = new Intent();
-        newIntent.putExtra("statusData", new StatusData("User Name"));
+        newIntent.putExtra("statusData", new StatusData(new UserProfile("User Name", ""), null));
         loginActivity.setIntent(newIntent);
         loginActivity.onCreate(null);
         usernameEdit = (EditText) loginActivity.findViewById(R.id.login_screen_username_edit);

@@ -37,7 +37,7 @@ public class LoginActivityPresenter {
         } else {
             StorageRepository fileRepository = viewer.getFileRepository(UserProfile.class);
             fileRepository.saveData(userProfile);
-            viewer.startNextActivity(MainActivity.class, new StatusData(userProfile.getUsername(), userResource));
+            viewer.startNextActivity(MainActivity.class, new StatusData(userProfile, userResource));
             viewer.closeActivity();
         }
     }

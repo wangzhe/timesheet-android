@@ -7,10 +7,15 @@ import com.tw.timesheet.android.storage.FileStorage;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.protocol.HTTP;
 
-public class UserProfile implements FileStorage {
+import java.io.Serializable;
+
+import static com.tw.timesheet.android.domain.Constant.DEPT_PS;
+
+public class UserProfile implements FileStorage, Serializable {
 
     private String username;
     private String password;
+    private Setting setting = new Setting(DEPT_PS, "China");
 
     public UserProfile() {
         username = "";
@@ -20,6 +25,15 @@ public class UserProfile implements FileStorage {
     public UserProfile(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public UserProfile(String username) {
+        this.username = username;
+        this.password = "";
+    }
+
+    public UserProfile(Setting setting) {
+        this.setting = setting;
     }
 
     public UserResource login(NetworkInfo network, DataServer dataServer) {
@@ -76,5 +90,9 @@ public class UserProfile implements FileStorage {
     public void update(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Setting getSetting() {
+        return setting;
     }
 }

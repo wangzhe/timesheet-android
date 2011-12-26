@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 public class StatusData implements Serializable {
 
-    private String username;
     private UserResource userResource;
+    private UserProfile userProfile;
 
-    public StatusData(String username) {
-        this.username = username;
-    }
-
-    public StatusData(String username, UserResource userResource) {
-        this.username = username;
+    public StatusData(UserProfile userProfile, UserResource userResource) {
+        this.userProfile = (userProfile == null) ? new UserProfile() : userProfile;
         this.userResource = userResource;
     }
 
     public String getUsername() {
-        return username;
+        return userProfile.getUsername();
     }
 
     public UserResource getUserResource() {
         return userResource;
+    }
+
+    public Setting getSetting() {
+        return userProfile.getSetting();
     }
 }

@@ -26,11 +26,6 @@ public class StartPageActivityPresenter {
     public void startApp() {
         new Thread() {
             public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 onAppStart(view.getFileRepository(UserProfile.class));
             }
         }.start();
@@ -40,18 +35,16 @@ public class StartPageActivityPresenter {
         UserProfile userProfile = storageRepository.loadData(new UserProfile());
         view.startNextActivity(
                 getNextActivityByUserProfileStatus(userProfile),
-                new StatusData(userProfile.getUsername(), userResource));
+                new StatusData(userProfile, userResource));
         view.closeActivity();
     }
 
     private Class getNextActivityByUserProfileStatus(UserProfile userProfile) {
-        Class nextActivity;
+        if (userProfile == null || userProfile.isEmpty()) return LoginActivity.class;
+
         userResource = userProfile.login(device.getActiveNetworkInfo(), DataServer.createDataServer(new TWTEHttpClient(new DefaultHttpClient())));
-        if (userResource == null) {
-            nextActivity = LoginActivity.class;
-        } else {
-            nextActivity = MainActivity.class;
-        }
-        return nextActivity;
+        if (userResource == null) return LoginActivity.class;
+
+        return MainActivity.class;
     }
 }
