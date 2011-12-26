@@ -26,6 +26,7 @@
               android:hint="input username here"
               android:textSize="20sp"
               android:maxLines="1"
+              android:inputType="textVisiblePassword"
               android:singleLine="true"/>
     <TextView android:id="@+id/login_screen_password_label"
               android:layout_width="fill_parent"
@@ -40,6 +41,7 @@
               android:textSize="20sp"
               android:maxLines="1"
               android:singleLine="true"
+              android:inputType="textPassword"
               android:password="true"/>
     <Button android:id="@+id/login_screen_login_button"
             android:layout_width="fill_parent"
