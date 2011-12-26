@@ -1,4 +1,6 @@
-class SearchesController < ApplicationController
+require 'pathname'
+
+class UserA::SearchesController < ApplicationController
 
   VIEW_DIR = Pathname.new(File.dirname(__FILE__) + "/../views")
   
