@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:attr="http://schemas.android.com/apk/res/com.tw.timesheet.android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:attr="http://schemas.android.com/apk/res/com.tw.timesheet.android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
     <com.tw.timesheet.android.widget.TitleBar android:id="@+id/setting_screen_title_bar"
                                               android:layout_width="fill_parent"
                                               android:layout_height="wrap_content"
-                                              attr:labelText="Setting"/>
+                                              attr:labelText="Setting"
+                                              android:layout_alignParentTop="true"/>
     <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent"
-                android:background="@drawable/item_background">
+                android:background="@drawable/item_background"
+                android:layout_below="@id/setting_screen_title_bar">
         <LinearLayout android:layout_width="fill_parent"
                       android:layout_height="fill_parent"
                       android:orientation="vertical">
-
             <com.tw.timesheet.android.widget.SettingItemView android:id="@+id/setting_screen_department"
                                                              android:layout_width="fill_parent"
                                                              android:layout_height="wrap_content"
@@ -128,25 +129,12 @@
 
             <ImageView android:layout_height="wrap_content" android:layout_width="fill_parent"
                        android:src="@drawable/shadow_hoz_bottom_top" android:scaleType="fitXY"/>
-
-
-            <LinearLayout android:layout_gravity="center_horizontal"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content">
-
-                <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/weekday"
-                                                                 android:layout_height="wrap_content"
-                                                                 android:layout_width="wrap_content"/>
-                <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/hour"
-                                                                 android:layout_height="wrap_content"
-                                                                 android:layout_width="wrap_content"/>
-                <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/mins"
-                                                                 android:layout_height="wrap_content"
-                                                                 android:layout_width="wrap_content"/>
-                <com.tw.timesheet.android.widget.wheel.WheelView android:id="@+id/ampm"
-                                                                 android:layout_height="wrap_content"
-                                                                 android:layout_width="wrap_content"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <ImageView android:id="@+id/popup_window_anchor_image"
+               android:layout_height="1dp"
+               android:src="@color/black"
+               android:layout_width="fill_parent"
+               android:gravity="center_horizontal"
+               android:layout_alignParentBottom="true"/>
+</RelativeLayout>

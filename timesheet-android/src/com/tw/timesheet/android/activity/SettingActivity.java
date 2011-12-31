@@ -2,16 +2,17 @@ package com.tw.timesheet.android.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.SettingActivityView;
 import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.presenter.SettingActivityPresenter;
 import com.tw.timesheet.android.widget.SettingItemView;
-import com.tw.timesheet.android.widget.WheelPopupWindow;
-import com.tw.timesheet.android.widget.wheel.WheelView;
-import com.tw.timesheet.android.widget.wheel.adapters.ArrayWheelAdapter;
-import com.tw.timesheet.android.widget.wheel.adapters.NumericWheelAdapter;
+import com.tw.timesheet.android.widget.TitleBar;
+import com.tw.timesheet.android.widget.NotificationSettingPopupWindow;
 
 public class SettingActivity extends TimeSheetActivity implements SettingActivityView {
 
@@ -26,6 +27,8 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
     private SettingItemView usernameView;
     private RelativeLayout addNotificationView;
     private LinearLayout NotificationListView;
+    private NotificationSettingPopupWindow popupWindow;
+    private TitleBar titleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +45,13 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
     }
 
     private void initUI() {
+        titleBar = (TitleBar) findViewById(R.id.setting_screen_title_bar);
         usernameView = (SettingItemView) findViewById(R.id.setting_screen_username);
         departmentView = (SettingItemView) findViewById(R.id.setting_screen_department);
         countryView = (SettingItemView) findViewById(R.id.setting_screen_country);
         isOnBgServCheckBox = (CheckBox) findViewById(R.id.setting_screen_active_background_service);
+        addNotificationView = (RelativeLayout) findViewById(R.id.setting_screen_title_add_notification_area);
         NotificationListView = (LinearLayout) findViewById(R.id.setting_screen_notification_linear_list_view);
-
-        initWeekDays(4);
-        initHours(6);
-        initMins(0);
-        initAMPM(1);
     }
 
     private void bindData() {
@@ -61,63 +61,18 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
     }
 
     private void setListeners() {
-        departmentView.setOnClickListener(new View.OnClickListener(){
+        departmentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.deptClicked();
             }
         });
-        addNotificationView.setOnClickListener(new View.OnClickListener(){
+        addNotificationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.addNotificationClicked();
             }
         });
-    }
-
-    private void initWeekDays(int weekDay) {
-        final WheelView weekDayWheel = (WheelView) findViewById(R.id.weekday);
-        ArrayWheelAdapter<String> weekDayAdapter =
-                new ArrayWheelAdapter<String>(this, new String[]
-                        {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"});
-        weekDayAdapter.setItemResource(R.layout.wheel_text_item_blue);
-        weekDayAdapter.setItemTextResource(R.id.text);
-
-        weekDayWheel.setViewAdapter(weekDayAdapter);
-        weekDayWheel.setCurrentItem(weekDay);
-    }
-
-    private void initHours(int hour) {
-        final WheelView hoursWheel = (WheelView) findViewById(R.id.hour);
-        NumericWheelAdapter hourAdapter = new NumericWheelAdapter(this, 1, 12, "%02d");
-        hourAdapter.setItemResource(R.layout.wheel_text_item);
-        hourAdapter.setItemTextResource(R.id.text);
-
-        hoursWheel.setViewAdapter(hourAdapter);
-        hoursWheel.setCurrentItem(hour);
-    }
-
-    private void initMins(int min) {
-        final WheelView minsWheel = (WheelView) findViewById(R.id.mins);
-        NumericWheelAdapter minAdapter = new NumericWheelAdapter(this, 0, 59, "%02d");
-        minAdapter.setItemResource(R.layout.wheel_text_item);
-        minAdapter.setItemTextResource(R.id.text);
-
-        minsWheel.setViewAdapter(minAdapter);
-        minsWheel.setCurrentItem(min);
-        minsWheel.setCyclic(true);
-    }
-
-
-    private void initAMPM(int ampm) {
-        final WheelView ampmWheel = (WheelView) findViewById(R.id.ampm);
-        ArrayWheelAdapter<String> ampmAdapter =
-                new ArrayWheelAdapter<String>(this, new String[]{"AM", "PM"});
-        ampmAdapter.setItemResource(R.layout.wheel_text_item);
-        ampmAdapter.setItemTextResource(R.id.text);
-
-        ampmWheel.setViewAdapter(ampmAdapter);
-        ampmWheel.setCurrentItem(ampm);
     }
 
     @Override
@@ -127,7 +82,8 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
 
     @Override
     public void showWheelPopupWindow() {
-        popupWindow = new WheelPopupWindow(this);
-        popupWindow.showNoResult();
+        View anchorImage = findViewById(R.id.popup_window_anchor_image);
+        popupWindow = new NotificationSettingPopupWindow(this, anchorImage);
+        popupWindow.show();
     }
 }
