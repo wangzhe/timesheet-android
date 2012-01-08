@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.SettingActivityView;
+import com.tw.timesheet.android.componment.SettingNotifyArea;
 import com.tw.timesheet.android.domain.StatusData;
 import com.tw.timesheet.android.presenter.SettingActivityPresenter;
+import com.tw.timesheet.android.widget.NotificationSettingPopupWindow;
 import com.tw.timesheet.android.widget.SettingItemView;
 import com.tw.timesheet.android.widget.TitleBar;
-import com.tw.timesheet.android.widget.NotificationSettingPopupWindow;
 
 public class SettingActivity extends TimeSheetActivity implements SettingActivityView {
 
@@ -26,7 +26,7 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
     private SettingActivityPresenter presenter;
     private SettingItemView usernameView;
     private RelativeLayout addNotificationView;
-    private LinearLayout NotificationListView;
+    private SettingNotifyArea notifyArea;
     private NotificationSettingPopupWindow popupWindow;
     private TitleBar titleBar;
 
@@ -50,14 +50,14 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
         departmentView = (SettingItemView) findViewById(R.id.setting_screen_department);
         countryView = (SettingItemView) findViewById(R.id.setting_screen_country);
         isOnBgServCheckBox = (CheckBox) findViewById(R.id.setting_screen_active_background_service);
-        addNotificationView = (RelativeLayout) findViewById(R.id.setting_screen_title_add_notification_area);
-        NotificationListView = (LinearLayout) findViewById(R.id.setting_screen_notification_linear_list_view);
+        notifyArea = (SettingNotifyArea) findViewById(R.id.setting_screen_notify_area);
     }
 
     private void bindData() {
         presenter = new SettingActivityPresenter(this, statusData);
         usernameView.setText(statusData.getUsername());
         presenter.init();
+        notifyArea.init(presenter);
     }
 
     private void setListeners() {
@@ -65,12 +65,6 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
             @Override
             public void onClick(View v) {
                 presenter.deptClicked();
-            }
-        });
-        addNotificationView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.addNotificationClicked();
             }
         });
     }
@@ -82,8 +76,11 @@ public class SettingActivity extends TimeSheetActivity implements SettingActivit
 
     @Override
     public void showWheelPopupWindow() {
-        View anchorImage = findViewById(R.id.popup_window_anchor_image);
-        popupWindow = new NotificationSettingPopupWindow(this, anchorImage);
-        popupWindow.show();
+        findViewById(R.id.setting_screen_wheel_fill_up_area).setVisibility(View.VISIBLE);
+        if (popupWindow == null) {
+            View anchorImage = findViewById(R.id.popup_window_anchor_image);
+            popupWindow = new NotificationSettingPopupWindow(this, anchorImage);
+            popupWindow.show();
+        }
     }
 }

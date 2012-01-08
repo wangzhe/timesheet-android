@@ -8,4 +8,9 @@
         <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
         <item name="android:windowTitleSize">42px</item>
     </style>
+
+    <style name="PopUpWindowAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/scale_in_from_top</item>
+        <item name="android:windowExitAnimation">@anim/scale_out_from_bottom</item>
+    </style>
 </resources>

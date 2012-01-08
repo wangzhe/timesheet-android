@@ -2,24 +2,26 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-    <TextView android:id="@+id/notification_text"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp">
+    <EditText android:id="@+id/notification_text"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:textColor="@color/notification_text"
-              android:textSize="12sp"
+              android:textSize="13sp"
               android:text="Saturday | 17:00 AM"
               android:layout_alignParentLeft="true"
               android:layout_centerVertical="true"
-              android:gravity="center_vertical"
-              android:paddingBottom="12dp"/>
-    <ImageView android:id="@+id/notification_entry_remove_icon"
-               android:layout_height="wrap_content"
-               android:layout_width="wrap_content"
-               android:src="@drawable/ic_remove"
-               android:scaleType="fitEnd"
-               android:layout_alignParentRight="true"
-               android:layout_centerVertical="true"/>
-    <include layout="@layout/setting_item_line"/>
+              android:editable="false"
+              android:focusable="false"
+              android:gravity="center_vertical"/>
+    <Button android:id="@+id/notification_entry_remove_icon"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_remove"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
 </RelativeLayout>

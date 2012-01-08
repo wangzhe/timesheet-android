@@ -107,12 +107,11 @@ public class NotificationSettingPopupWindow extends PopupWindow {
 
     public void show() {
         showAsDropDown(anchorImage, 0, getOffsetY());
-//        showAtLocation(anchorImage, Gravity.NO_GRAVITY, 0, 0);
     }
 
     private int getOffsetY() {
         //should be calculated
-        return -151;
+        return -71;
     }
 
 }

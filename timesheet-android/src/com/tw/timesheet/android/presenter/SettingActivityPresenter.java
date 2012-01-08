@@ -2,7 +2,6 @@ package com.tw.timesheet.android.presenter;
 
 import com.tw.timesheet.android.R;
 import com.tw.timesheet.android.activity.callback.SettingActivityView;
-import com.tw.timesheet.android.domain.ScheduleNotification;
 import com.tw.timesheet.android.domain.Setting;
 import com.tw.timesheet.android.domain.StatusData;
 
@@ -31,7 +30,8 @@ public class SettingActivityPresenter {
     }
 
     public void addNotificationClicked() {
-        ScheduleNotification notification = setting.createNotification();
+//        ScheduleNotification notification = setting.createNotification();
+        System.out.println("viewer = " + "clicked");
         viewer.showWheelPopupWindow();
     }
 }
