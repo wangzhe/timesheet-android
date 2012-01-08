@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:paddingTop="12dp"
+              android:paddingLeft="13dp"
+              android:paddingRight="15dp"
+              android:paddingBottom="12dp">
+    <RelativeLayout android:id="@+id/setting_notify_area_add_notification"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+        <TextView android:id="@+id/setting_screen_notification_label"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/property_detail_item_label_text"
+                  android:textSize="12sp"
+                  android:textStyle="bold"
+                  android:text="Notification"
+                  android:layout_alignParentLeft="true"
+                  android:layout_centerVertical="true"
+                  android:gravity="top"
+                  android:paddingBottom="12dp"/>
+        <ImageView android:id="@+id/setting_screen_add_notification"
+                   android:layout_height="wrap_content"
+                   android:layout_width="wrap_content"
+                   android:src="@drawable/ic_add"
+                   android:scaleType="fitEnd"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"/>
+        <LinearLayout android:id="@+id/property_detail_item_divider_line_top"
+                      android:layout_height="1px"
+                      android:layout_width="fill_parent"
+                      android:background="@color/property_detail_divider_top"
+                      android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <LinearLayout android:id="@+id/setting_notify_area_linear_list_view"
+                  android:layout_height="wrap_content"
+                  android:layout_width="wrap_content"
+                  android:orientation="vertical"
+                  android:paddingTop="12dp"/>
+</LinearLayout>
